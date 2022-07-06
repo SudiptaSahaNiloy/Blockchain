@@ -14,8 +14,6 @@ class Body extends Component {
       </Routes>
     )
 
-    console.log(routes);
-
     return (
       <div>
         {routes}
