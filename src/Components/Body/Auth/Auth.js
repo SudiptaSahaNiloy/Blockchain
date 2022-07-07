@@ -90,19 +90,9 @@ class Auth extends Component {
                                 <Input
                                     type="text"
                                     onChange={handleChange}
-                                    name="currentAddress"
-                                    values={values.currentAddress}
-                                    placeholder="Current Address" />
-                            </FormGroup>
-                        </Col><br />
-                        <Col md={12}>
-                            <FormGroup>
-                                <Input
-                                    type="text"
-                                    onChange={handleChange}
-                                    name="NID"
-                                    values={values.NID}
-                                    placeholder="NID No." />
+                                    name="instituition"
+                                    values={values.instituition}
+                                    placeholder="Current Instituition" />
                             </FormGroup>
                         </Col><br />
                     </Row>
@@ -176,7 +166,7 @@ class Auth extends Component {
                 <div className="row">
                     {this.props.errorMsg !== null ? alertMsg : null}
                     <div className="col-md-8 login-image-section">
-                        <img src="Images/Login.jpg" className="img-fluid" alt="Login_Car" />
+                        {/* <img src="Images/Login.jpg" className="img-fluid" alt="Login_Car" /> */}
                     </div>
                     <div className="col-md-4">
                         <Formik
@@ -186,8 +176,7 @@ class Auth extends Component {
                                 email: "",
                                 password: "",
                                 confirmPassword: "",
-                                currentAddress: "",
-                                NID: "",
+                                instituition: "",
                             }}
 
                             onSubmit={

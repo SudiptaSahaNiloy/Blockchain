@@ -4,7 +4,9 @@ const INITIAL_STATE = {
     userId: null,
     userName: null,
     userInstitution: null,
+    userRole: null,
     users: [],
+    errorMsg: null,
 }
 
 export const reducer = (state = INITIAL_STATE, action) => {
@@ -12,7 +14,8 @@ export const reducer = (state = INITIAL_STATE, action) => {
         case actionTypes.AUTH_SUCCESS:
             return {
                 ...state,
-                customerName: action.payload.customerName,
+                userId: action.payload.userId,
+                userName: action.payload.userName,
             }
         case actionTypes.AUTH_FAILED:
             return {
@@ -23,6 +26,11 @@ export const reducer = (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 displayName: null,
+            }
+        case actionTypes.GET_USER:
+            return {
+                ...state,
+                user: action.payload.user,
             }
         default:
             return state;
