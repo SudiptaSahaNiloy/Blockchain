@@ -5,7 +5,7 @@ const INITIAL_STATE = {
     userName: null,
     userInstitution: null,
     userRole: [],
-    users: [],
+    user: [],
     errorMsg: null,
 }
 

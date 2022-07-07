@@ -22,8 +22,6 @@ class Header extends Component {
             })
         };
 
-        console.log(this.props.userRole[1]);
-
         return (
             <Navbar className="navbar-section" color="dark" dark expand="md" >
                 <div className="navbar-section-brand">

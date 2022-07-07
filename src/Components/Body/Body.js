@@ -29,8 +29,6 @@ class Body extends Component {
   render() {
     let routes = null;
 
-    console.log(this.props.userRole);
-
     if (this.props.userName !== null && this.props.userId !== null) {
       if (this.props.userRole[1] === 'admin') {
         routes = (

@@ -18,7 +18,7 @@ const mapDispatchToProps = (dispatch) => {
     return ({
         authCheck: () => dispatch(authCheck()),
         getUser: () => dispatch(getUser()),
-        getRole: (user, userId, userName) => dispatch(getRole(user, userId, userName)),
+        getRole: (users, userId, userName) => dispatch(getRole(users, userId, userName)),
     })
 }
 

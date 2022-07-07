@@ -7,7 +7,8 @@
       "Institution": "CUET",
       "Role": [
         "user",
-        "admin"
+        "admin",
+        "verifier"
       ],
       "id": 1
     },
@@ -30,7 +31,7 @@
       "Institution": "CUET",
       "Role": [
         "user",
-        ""
+        "verifier"
       ],
       "id": 3
     }

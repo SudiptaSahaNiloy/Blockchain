@@ -10,6 +10,24 @@ export const userRole = (role) => {
     })
 }
 
+export const updateRole = (id, user) => {
+    const URL = 'http://localhost:3001/Users/';
+
+    const newRole = [...user.Role];
+    console.log(newRole);
+    newRole.push("verifier");
+    console.log(newRole);
+
+    axios.put(URL + id, {
+        ...user,
+        Role: newRole,
+    }).then(resp => {
+        console.log(resp.data);
+    }).catch(error => {
+        console.log(error);
+    });
+}
+
 export const getRole = (user, userId, userName) => dispatch => {
     if (user !== undefined) {
         let found = 0;
@@ -19,26 +37,10 @@ export const getRole = (user, userId, userName) => dispatch => {
                 dispatch(userRole(item.Role));
             }
         })
-        if (found === 0) {
-            console.log("User Not found");
-        }
+        // if (found === 0) {
+        //     console.log("User Not found");
+        // }
     }
-
-    // let role = {
-    //     admin: false,
-    //     verifier: false,
-    // }
-
-    // userRole.map((item) => {
-    //     if (item === 'admin') {
-    //         // console.log("found admin");
-    //         role.admin = true;
-    //     }
-    //     if (item === 'verifier') {
-    //         // console.log("found verifier");
-    //         role.verifier = true;
-    //     }
-    // })
 }
 
 export const userInfo = (user) => {
