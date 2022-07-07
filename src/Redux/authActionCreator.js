@@ -70,10 +70,16 @@ export const authCheck = () => dispatch => {
 
 
 export const userData = (values) => dispatch => {
+    console.log(values);
     let firstName = values.firstName;
     let lastName = values.lastName;
     const fullName = firstName + " " + lastName;
-    let role = ["user"];
+    let role = [];
+    if(values.adminSelect[0] === 'on'){
+        role = ["user", "admin"];
+    }else{
+        role = ["user", ""];
+    }
 
     const userData = {
         Name: fullName,

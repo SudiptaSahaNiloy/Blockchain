@@ -1,36 +1,38 @@
 {
-    "Users": [
-        {
-            "Name": "Sudipta Saha Niloy",
-            "Email": "niloy305968@gmail.com",
-            "Password": "bangladesh",
-            "Institution": "CUET",
-            "Role": [
-                "user",
-                "admin"
-            ],
-            "id": 1
-        },
-        {
-            "Name": "Laxmi Rani Saha",
-            "Email": "laxmi@gmail.com",
-            "Password": "bangladesh",
-            "Institution": "CUET",
-            "Role": [
-                "user",
-                "verifier"
-            ],
-            "id": 2
-        },
-        {
-            "Name": "Sabiha Samad",
-            "Email": "sabiha@gmail.com",
-            "Password": "bangladesh",
-            "Institution": "CUET",
-            "Role": [
-                "user"
-            ],
-            "id": 3
-        }
-    ]
+  "Users": [
+    {
+      "Name": "Sudipta Saha Niloy",
+      "Email": "niloy305968@gmail.com",
+      "Password": "bangladesh",
+      "Institution": "CUET",
+      "Role": [
+        "user",
+        "admin"
+      ],
+      "id": 1
+    },
+    {
+      "Name": "Laxmi Rani Saha",
+      "Email": "laxmi@gmail.com",
+      "Password": "bangladesh",
+      "Institution": "CUET",
+      "Role": [
+        "user",
+        "",
+        "verifier"
+      ],
+      "id": 2
+    },
+    {
+      "Name": "maliha apu",
+      "Email": "maliha@gmail.com",
+      "Password": "bangladesh",
+      "Institution": "CUET",
+      "Role": [
+        "user",
+        ""
+      ],
+      "id": 3
+    }
+  ]
 }

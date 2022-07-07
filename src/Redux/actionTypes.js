@@ -4,3 +4,4 @@ export const AUTH_LOADING = 'AUTH_LOADING';
 export const AUTH_LOGOUT = 'AUTH_LOGOUT';
 
 export const GET_USER = 'GET_USER';
+export const USER_ROLE = 'USER_ROLE';

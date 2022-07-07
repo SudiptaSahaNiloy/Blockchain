@@ -4,7 +4,7 @@ const INITIAL_STATE = {
     userId: null,
     userName: null,
     userInstitution: null,
-    userRole: null,
+    userRole: [],
     users: [],
     errorMsg: null,
 }
@@ -31,6 +31,11 @@ export const reducer = (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 user: action.payload.user,
+            }
+        case actionTypes.USER_ROLE:
+            return {
+                ...state,
+                userRole: action.payload.role,
             }
         default:
             return state;

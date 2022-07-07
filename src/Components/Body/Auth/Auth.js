@@ -1,7 +1,7 @@
 import { Formik } from 'formik';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Button, Form, FormGroup, Input, Col, Row, Alert } from 'reactstrap';
+import { Button, Form, FormGroup, Input, Col, Row, Alert, Label } from 'reactstrap';
 import { auth, userData } from '../../../Redux/authActionCreator';
 import './Stylesheet/Auth.css';
 
@@ -25,6 +25,7 @@ class Auth extends Component {
 
     render() {
         const signUpForm = (values, handleChange, handleSubmit, errors) => {
+            console.log(values.adminSelect);
             return (
                 <Form onSubmit={handleSubmit}>
                     <Row>
@@ -93,6 +94,19 @@ class Auth extends Component {
                                     name="instituition"
                                     values={values.instituition}
                                     placeholder="Current Instituition" />
+                            </FormGroup>
+                        </Col><br />
+                        <Col md={12}>
+                            <FormGroup>
+                                <Input
+                                    type="checkbox"
+                                    onChange={handleChange}
+                                    name="adminSelect"
+                                    class="form-check-input"
+                                    id="exampleCheck1" />
+                                <Label class="form-check-label" for="exampleCheck1">
+                                    Admin?
+                                </Label>
                             </FormGroup>
                         </Col><br />
                     </Row>
@@ -177,6 +191,7 @@ class Auth extends Component {
                                 password: "",
                                 confirmPassword: "",
                                 instituition: "",
+                                admin: "",
                             }}
 
                             onSubmit={

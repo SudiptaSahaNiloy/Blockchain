@@ -4,13 +4,14 @@ import { connect } from 'react-redux';
 import Home from './Home/Home';
 import Login from './Auth/Auth';
 import Admin from '../Admin/Admin';
-import { getUser } from '../../Redux/userActionCreators'
+import { getUser } from '../../Redux/userActionCreators';
 
 const mapStateToProps = (state) => {
   return ({
     user: state.user,
     userId: state.userId,
     userName: state.userName,
+    userRole: state.userRole,
   })
 }
 
@@ -27,38 +28,11 @@ class Body extends Component {
 
   render() {
     let routes = null;
-    let userRole = [];
 
-    if (this.props.user !== undefined) {
-      let found = 0;
-      this.props.user.map((item) => {
-        if (item.id === parseInt(this.props.userId) && item.Name === this.props.userName) {
-          found = 1;
-          userRole = item.Role;
-        }
-      })
-      if (found === 0) {
-        console.log("User Not found");
-      }
-    }
-
-    let admin = false;
-    let verifier = false;
-
-    userRole.map((item) => {
-      if (item === 'admin') {
-        // console.log("found admin");
-        admin = true;
-      }
-      if (item === 'verifier') {
-        // console.log("found verifier");
-        verifier = true;
-      }
-    })
+    console.log(this.props.userRole);
 
     if (this.props.userName !== null && this.props.userId !== null) {
-      console.log(admin);
-      if (admin) {
+      if (this.props.userRole[1] === 'admin') {
         routes = (
           <Routes>
             <Route path="/admin" exact element={<Admin />} />
@@ -67,7 +41,7 @@ class Body extends Component {
           </Routes>
         )
       }
-      else if (verifier === true) {
+      else if (this.props.userRole[1] === 'verifier') {
         routes = (
           <Routes>
             <Route path="/login" exact element={<Login />} />
@@ -83,6 +57,12 @@ class Body extends Component {
           </Routes>
         )
       }
+    } else {
+      routes = (
+        <Routes>
+          <Route path="/login" exact element={<Login />} />
+        </Routes>
+      )
     }
 
     return (

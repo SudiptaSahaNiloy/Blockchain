@@ -2,6 +2,13 @@ import React from 'react';
 import "./Style/Header.css";
 import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
 import { Component } from 'react';
+import { connect } from 'react-redux';
+
+const mapStateToProps = (state) => {
+    return ({
+        userRole: state.userRole,
+    })
+}
 
 class Header extends Component {
     state = {
@@ -15,6 +22,8 @@ class Header extends Component {
             })
         };
 
+        console.log(this.props.userRole[1]);
+
         return (
             <Navbar className="navbar-section" color="dark" dark expand="md" >
                 <div className="navbar-section-brand">
@@ -27,9 +36,12 @@ class Header extends Component {
                             <NavItem>
                                 <NavLink href="/home">Home</NavLink>
                             </NavItem>
-                            <NavItem>
-                                <NavLink href="/admin">Admin</NavLink>
-                            </NavItem>
+                            {this.props.userRole[1] === 'admin' ?
+                                <NavItem>
+                                    <NavLink href="/admin">Admin</NavLink>
+                                </NavItem>
+                                : null
+                            }
                             <NavItem>
                                 <NavLink href="/login">Login</NavLink>
                             </NavItem>
@@ -42,4 +54,4 @@ class Header extends Component {
 
 }
 
-export default Header;
+export default connect(mapStateToProps)(Header);
