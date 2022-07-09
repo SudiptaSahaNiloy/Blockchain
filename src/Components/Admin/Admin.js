@@ -11,13 +11,13 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-    return({
-        updateRole: (id, user) => dispatch(updateRole(id, user)), 
+    return ({
+        updateRole: (id, user) => dispatch(updateRole(id, user)),
     })
 }
 
 class Admin extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
             clicked: false,
@@ -25,16 +25,21 @@ class Admin extends Component {
     }
 
     handleOnClick = (id, user) => {
-        if(this.state.clicked === false){
+        // console.log(user.Role);
+        let verifier = false;
+        if (user.Role[2] === 'verifier') {
+            verifier = true;
+        }
+        if (verifier === false) {
             this.props.updateRole(id, user);
-            this.setState({clicked: true})
             window.location.reload();
         }
-        
     }
 
     render() {
         let user = null;
+
+        // console.log(this.props.user);
 
         user = this.props.user.map((item) => {
             return (

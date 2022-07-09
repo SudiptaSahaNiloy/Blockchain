@@ -2,7 +2,8 @@ import axios from "axios";
 import * as actionTypes from './actionTypes';
 
 export const userRole = (role) => {
-    return({
+    // console.log(role);
+    return ({
         type: actionTypes.USER_ROLE,
         payload: {
             role: role,
@@ -21,11 +22,12 @@ export const updateRole = (id, user) => {
     axios.put(URL + id, {
         ...user,
         Role: newRole,
-    }).then(resp => {
-        console.log(resp.data);
-    }).catch(error => {
-        console.log(error);
-    });
+    })
+        .then(resp => {
+            // console.log(resp.data);
+        }).catch(error => {
+            console.log(error);
+        });
 }
 
 export const getRole = (user, userId, userName) => dispatch => {
@@ -43,6 +45,7 @@ export const getRole = (user, userId, userName) => dispatch => {
     }
 }
 
+// reducer pathanor kaaj korbe
 export const userInfo = (user) => {
     return ({
         type: actionTypes.GET_USER,
@@ -57,5 +60,6 @@ export const getUser = () => dispatch => {
     axios.get(URL)
         .then(response => {
             dispatch(userInfo(response.data))
+            // dispatch(userRole(response.data.Role))
         })
 }

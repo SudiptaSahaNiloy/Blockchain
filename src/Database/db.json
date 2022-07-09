@@ -19,21 +19,46 @@
       "Institution": "CUET",
       "Role": [
         "user",
-        "",
-        "verifier"
+        ""
       ],
       "id": 2
     },
     {
-      "Name": "maliha apu",
+      "Name": "Maliha jahan",
       "Email": "maliha@gmail.com",
+      "Password": "bangladesh",
+      "Institution": "BUET",
+      "Role": [
+        "user",
+        "admin",
+        "verifier",
+        "verifier"
+      ],
+      "id": 3
+    },
+    {
+      "Name": "Sabiha Niloy",
+      "Email": "sab@gmail.com",
       "Password": "bangladesh",
       "Institution": "CUET",
       "Role": [
         "user",
+        "admin",
         "verifier"
       ],
-      "id": 3
+      "id": 4
+    },
+    {
+      "Name": "Sabiha Niloy",
+      "Email": "sab@gmail.com",
+      "Password": "bangladesh",
+      "Institution": "CUET",
+      "Role": [
+        "user",
+        "",
+        "verifier"
+      ],
+      "id": 5
     }
   ]
 }

@@ -25,7 +25,6 @@ class Auth extends Component {
 
     render() {
         const signUpForm = (values, handleChange, handleSubmit, errors) => {
-            console.log(values.adminSelect);
             return (
                 <Form onSubmit={handleSubmit}>
                     <Row>
@@ -117,6 +116,7 @@ class Auth extends Component {
                     <div className="d-flex justify-content-center">
                         <Button
                             type="submit"
+                            // onClick={() => this.setState({ authMode: "signInWithPassword" })}
                             style={{
                                 width: "100%",
                                 backgroundColor: "#1877F2",
@@ -196,6 +196,8 @@ class Auth extends Component {
 
                             onSubmit={
                                 (values) => {
+                                    // console.log(values);
+
                                     // signIn
                                     this.props.auth(values.email, values.password);
 
@@ -203,7 +205,6 @@ class Auth extends Component {
                                     if (this.state.authMode === 'signUp') {
                                         this.props.userData(values);
                                     }
-                                    // console.log(values);
                                 }
                             }
 

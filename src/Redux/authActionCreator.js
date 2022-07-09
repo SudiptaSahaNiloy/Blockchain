@@ -70,7 +70,7 @@ export const authCheck = () => dispatch => {
 
 
 export const userData = (values) => dispatch => {
-    console.log(values);
+    // console.log(values);
     let firstName = values.firstName;
     let lastName = values.lastName;
     const fullName = firstName + " " + lastName;
@@ -92,8 +92,11 @@ export const userData = (values) => dispatch => {
     const URL = 'http://localhost:3001/Users';
     axios.post(URL, userData)
         .then(response => {
-            dispatch(authSuccess(userData.Name))
+            // console.log("hi");
+            // console.log(response);
+            dispatch(authSuccess(userData.Id, userData.Name));
         })
+        .catch(err => console.log(err))
 }
 
 

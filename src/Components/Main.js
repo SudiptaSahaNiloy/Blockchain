@@ -4,7 +4,7 @@ import Body from './Body/Body';
 import Footer from './Footer/Footer';
 import { authCheck } from '../Redux/authActionCreator';
 import { connect } from 'react-redux';
-import { getUser, getRole } from '../Redux/userActionCreators';
+import { getUser, getRole} from '../Redux/userActionCreators';
 
 const mapStateToProps = (state) => {
     return({
@@ -24,7 +24,7 @@ const mapDispatchToProps = (dispatch) => {
 
 class Main extends Component {
     componentDidMount() {
-        this.props.authCheck();
+        this.props.authCheck(); //previous authenticity
         this.props.getUser();
     }
 
