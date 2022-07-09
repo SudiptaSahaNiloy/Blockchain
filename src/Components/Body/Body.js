@@ -42,10 +42,11 @@ class Body extends Component {
           </Routes>
         )
       }
-      if (this.props.userRole[2] === 'verifier') {
+      else if (this.props.userRole[2] === 'verifier') {
         routes = (
           <Routes>
             <Route path="/login" exact element={<Login />} />
+            {/* <Route path="/admin" exact element={<Admin />} /> */}
             <Route path="/home" exact element={<Home />} />
             <Route path="/profile" exact element={<Profile />} />
             <Route path="/verify" exact element={<Verify />} />

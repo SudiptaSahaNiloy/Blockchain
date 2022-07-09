@@ -7,6 +7,7 @@ import { updateRole } from '../../Redux/userActionCreators';
 const mapStateToProps = (state) => {
     return ({
         user: state.user,
+        userInstitution: state.userInstitution,
     })
 }
 
@@ -17,13 +18,6 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 class Admin extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            clicked: false,
-        }
-    }
-
     handleOnClick = (id, user) => {
         // console.log(user.Role);
         let verifier = false;
@@ -39,24 +33,26 @@ class Admin extends Component {
     render() {
         let user = null;
 
-        // console.log(this.props.user);
+        // console.log(this.props.userInstitution);
 
         user = this.props.user.map((item) => {
-            return (
-                <tbody>
-                    <tr>
-                        <td>{item.id}</td>
-                        <td>{item.Name}</td>
-                        <td>{item.Email}</td>
-                        <td>{item.Institution}</td>
-                        <td>
-                            <Button onClick={() => this.handleOnClick(item.id, item)}>
-                                Make Verifier
-                            </Button>
-                        </td>
-                    </tr>
-                </tbody>
-            )
+            if(this.props.userInstitution === item.Institution){
+                return (
+                    <tbody>
+                        <tr>
+                            <td>{item.id}</td>
+                            <td>{item.Name}</td>
+                            <td>{item.Email}</td>
+                            <td>{item.Institution}</td>
+                            <td>
+                                <Button onClick={() => this.handleOnClick(item.id, item)}>
+                                    Make Verifier
+                                </Button>
+                            </td>
+                        </tr>
+                    </tbody>
+                )
+            }
         })
 
         return (

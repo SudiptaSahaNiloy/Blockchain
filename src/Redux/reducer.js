@@ -37,6 +37,11 @@ export const reducer = (state = INITIAL_STATE, action) => {
                 ...state,
                 userRole: action.payload.role,
             }
+        case actionTypes.USER_INSTITUTION:
+            return {
+                ...state,
+                userInstitution: action.payload.institution,
+            }
         default:
             return state;
     }

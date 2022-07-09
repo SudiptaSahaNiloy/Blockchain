@@ -15,9 +15,9 @@ export const updateRole = (id, user) => {
     const URL = 'http://localhost:3001/Users/';
 
     const newRole = [...user.Role];
-    console.log(newRole);
+    // console.log(newRole);
     newRole.push("verifier");
-    console.log(newRole);
+    // console.log(newRole);
 
     axios.put(URL + id, {
         ...user,
@@ -45,6 +45,26 @@ export const getRole = (user, userId, userName) => dispatch => {
     }
 }
 
+export const userInstitution = (institution) => {
+    // console.log(institution);
+    return {
+        type: actionTypes.USER_INSTITUTION,
+        payload: {
+            institution: institution,
+        }
+    }
+}
+
+export const getInstitution = (users) => dispatch => {
+    const userId = parseInt(localStorage.getItem('userId'));
+
+    users.map((item) => {
+        if (item.id === userId) {
+            dispatch(userInstitution(item.Institution))
+        }
+    })
+}
+
 // reducer pathanor kaaj korbe
 export const userInfo = (user) => {
     return ({
@@ -59,8 +79,8 @@ export const getUser = () => dispatch => {
     const URL = 'http://localhost:3001/Users';
     axios.get(URL)
         .then(response => {
-            dispatch(userInfo(response.data))
-            // dispatch(userRole(response.data.Role))
+            dispatch(userInfo(response.data));
+            dispatch(getInstitution(response.data));
         })
         .catch(error => console.log(error))
 }
