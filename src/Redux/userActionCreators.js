@@ -62,4 +62,5 @@ export const getUser = () => dispatch => {
             dispatch(userInfo(response.data))
             // dispatch(userRole(response.data.Role))
         })
+        .catch(error => console.log(error))
 }

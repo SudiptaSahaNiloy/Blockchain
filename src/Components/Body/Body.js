@@ -5,6 +5,8 @@ import Home from './Home/Home';
 import Login from './Auth/Auth';
 import Admin from '../Admin/Admin';
 import { getUser } from '../../Redux/userActionCreators';
+import Profile from './Profile/Profile';
+import Verify from './Verify/Verify';
 
 const mapStateToProps = (state) => {
   return ({
@@ -36,14 +38,17 @@ class Body extends Component {
             <Route path="/admin" exact element={<Admin />} />
             <Route path="/login" exact element={<Login />} />
             <Route path="/home" exact element={<Home />} />
+            <Route path="/profile" exact element={<Profile />} />
           </Routes>
         )
       }
-      else if (this.props.userRole[1] === 'verifier') {
+      if (this.props.userRole[2] === 'verifier') {
         routes = (
           <Routes>
             <Route path="/login" exact element={<Login />} />
             <Route path="/home" exact element={<Home />} />
+            <Route path="/profile" exact element={<Profile />} />
+            <Route path="/verify" exact element={<Verify />} />
           </Routes>
         )
       }
@@ -52,6 +57,7 @@ class Body extends Component {
           <Routes>
             <Route path="/login" exact element={<Login />} />
             <Route path="/home" exact element={<Home />} />
+            <Route path="/profile" exact element={<Profile />} />
           </Routes>
         )
       }

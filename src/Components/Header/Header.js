@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 
 const mapStateToProps = (state) => {
     return ({
+        userId: state.userId,
         userRole: state.userRole,
     })
 }
@@ -31,18 +32,33 @@ class Header extends Component {
                 <div style={{ width: "100%" }}>
                     <Collapse isOpen={this.state.isOpen} navbar>
                         <Nav className="mr-auto" navbar>
-                                <NavItem>
-                                    <NavLink href="/home">Home</NavLink>
-                                </NavItem>
+                            <NavItem>
+                                <NavLink href="/home">Home</NavLink>
+                            </NavItem>
                             {this.props.userRole[1] === 'admin' ?
                                 <NavItem>
                                     <NavLink href="/admin">Admin</NavLink>
                                 </NavItem>
                                 : null
                             }
+                            {this.props.userRole[2] === 'verifier' ?
+                                <NavItem>
+                                    <NavLink href="/verify">Verify</NavLink>
+                                </NavItem>
+                                : null
+                            }
+                            <NavItem>
+                                <NavLink href="/profile">Profile</NavLink>
+                            </NavItem>
                             <NavItem>
                                 <NavLink href="/login">Login</NavLink>
                             </NavItem>
+                            {this.props.userId !== null ?
+                                <NavItem>
+                                    <NavLink href="/logout">Logout</NavLink>
+                                </NavItem> : null
+                            }
+
                         </Nav>
                     </Collapse>
                 </div>
