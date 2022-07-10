@@ -101,14 +101,13 @@ class Profile extends Component {
                                             </div>
                                             <div className="row pt-1">
                                                 <div className="custom-file">
-                                                    {/* <form action="/api" method="POST" encType='multipart/form-data'>
-                                                        <input type="file" className="custom-file-input" name="upload" multiple id="validatedCustomFile" required />
-                                                        <input type="submit" value="Upload" />
-                                                        <label className="custom-file-label" for="validatedCustomFile">Choose file</label>
-                                                    </form> */}
-                                                    <div className="form-row">
-                                                        <input type="file" className="form-control" name="upload_file" onChange={this.handleInputChange} />
-                                                        <button type="submit" className="btn btn-dark" onClick={() => this.submit()}>Save</button>
+                                                    <div className="row">
+                                                        <div className="col-8">
+                                                            <input type="file" className="form-control" name="upload_file" onChange={this.handleInputChange} />
+                                                        </div>
+                                                        <div className="col-4">
+                                                            <button type="submit" className="btn btn-dark" onClick={() => this.submit()}>Upload</button>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
