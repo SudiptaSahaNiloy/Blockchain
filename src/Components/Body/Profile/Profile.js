@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './Stylesheet/Profile.css';
 import { connect } from 'react-redux';
 import { getUser } from '../../../Redux/userActionCreators';
+import axios from "axios";
 
 const mapStateToProps = (state) => {
     return ({
@@ -19,6 +20,35 @@ const mapDispatchToProps = (dispatch) => {
 class Profile extends Component {
     componentDidMount() {
         // this.props.getUser();
+    }
+
+    constructor() {
+        super();
+        this.state = {
+            selectedFile: '',
+        }
+
+        this.handleInputChange = this.handleInputChange.bind(this);
+    }
+
+    handleInputChange(event) {
+        // console.log(event.target.files[0]);
+        this.setState({
+            selectedFile: event.target.files[0],
+        })
+    }
+
+    submit() {
+        const data = new FormData();
+        data.append('file', this.state.selectedFile);
+
+        let url = "/api";
+
+        axios.post(url, data)
+            .then(res => { // then print response status
+                console.log(res);
+            })
+            .catch(err => console.log(err))
     }
 
     render() {
@@ -67,6 +97,19 @@ class Profile extends Component {
                                                 <div className="col-6 mb-3">
                                                     <h6>Institution</h6>
                                                     <p className="text-muted">{currentUser.Institution}</p>
+                                                </div>
+                                            </div>
+                                            <div className="row pt-1">
+                                                <div className="custom-file">
+                                                    {/* <form action="/api" method="POST" encType='multipart/form-data'>
+                                                        <input type="file" className="custom-file-input" name="upload" multiple id="validatedCustomFile" required />
+                                                        <input type="submit" value="Upload" />
+                                                        <label className="custom-file-label" for="validatedCustomFile">Choose file</label>
+                                                    </form> */}
+                                                    <div className="form-row">
+                                                        <input type="file" className="form-control" name="upload_file" onChange={this.handleInputChange} />
+                                                        <button type="submit" className="btn btn-dark" onClick={() => this.submit()}>Save</button>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>

@@ -39,6 +39,7 @@ class Body extends Component {
             <Route path="/login" exact element={<Login />} />
             <Route path="/home" exact element={<Home />} />
             <Route path="/profile" exact element={<Profile />} />
+            <Route path="/verify" exact element={<Verify />} />
           </Routes>
         )
       }
