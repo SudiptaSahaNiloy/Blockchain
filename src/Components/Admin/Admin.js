@@ -33,10 +33,12 @@ class Admin extends Component {
     render() {
         let user = null;
 
-        // console.log(this.props.userInstitution);
+        // if (this.state.verify) {
+        //     return <Modal />
+        // }
 
         user = this.props.user.map((item) => {
-            if(this.props.userInstitution === item.Institution){
+            if (this.props.userInstitution === item.Institution) {
                 return (
                     <tbody>
                         <tr>
@@ -56,18 +58,21 @@ class Admin extends Component {
         })
 
         return (
-            <Table striped bordered hover>
-                <thead>
-                    <tr>
-                        <th>#id</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Institution</th>
-                        <th>Make Verifier</th>
-                    </tr>
-                </thead>
-                {user}
-            </Table>
+            <div>
+                < Table striped bordered hover >
+                    <thead>
+                        <tr>
+                            <th>#id</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Institution</th>
+                            <th>Make Verifier</th>
+                        </tr>
+                    </thead>
+                    {user}
+                </ Table>
+            </div>
+
         );
     }
 }

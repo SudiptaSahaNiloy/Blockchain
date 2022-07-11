@@ -6,3 +6,6 @@ export const AUTH_LOGOUT = 'AUTH_LOGOUT';
 export const GET_USER = 'GET_USER';
 export const USER_ROLE = 'USER_ROLE';
 export const USER_INSTITUTION = 'USER_INSTITUTION';
+
+export const UPLOADED_FILE_INFO = 'UPLOADED_FILE_INFO';
+

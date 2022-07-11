@@ -13,7 +13,8 @@ app.post('/api', (req, res) => {
     form.parse(req);
 
     form.on('fileBegin', (formname, file) => {
-        file.filepath = __dirname + '/uploads/' + file.originalFilename;
+        // must uncomment for file upload
+        // file.filepath = __dirname + '/uploads/' + file.originalFilename;
     });
 
     res.status(200);

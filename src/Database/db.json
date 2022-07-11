@@ -60,5 +60,37 @@
       ],
       "id": 5
     }
+  ],
+  "UploadedFile": [
+    {
+      "User_Id": 1,
+      "User_Name": "Sudipta Saha Niloy",
+      "User_Email": "niloy305968@gmail.com",
+      "Name": "3949076.jpg",
+      "Size": 73254,
+      "Type": "image/jpeg",
+      "Verified": false,
+      "id": 1
+    },
+    {
+      "User_Id": 1,
+      "User_Name": "Sudipta Saha Niloy",
+      "User_Email": "niloy305968@gmail.com",
+      "Name": "106182.jpg",
+      "Size": 427095,
+      "Type": "image/jpeg",
+      "Verified": false,
+      "id": 2
+    },
+    {
+      "User_Id": 1,
+      "User_Name": "Sudipta Saha Niloy",
+      "User_Email": "niloy305968@gmail.com",
+      "Name": "wp8137283-lavender-pc-anime-wallpapers.png",
+      "Size": 10768517,
+      "Type": "image/png",
+      "Verified": true,
+      "id": 3
+    }
   ]
 }

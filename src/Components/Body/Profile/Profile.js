@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './Stylesheet/Profile.css';
 import { connect } from 'react-redux';
-import { getUser } from '../../../Redux/userActionCreators';
+import { addUploadFileInfo, getUser } from '../../../Redux/userActionCreators';
 import axios from "axios";
 
 const mapStateToProps = (state) => {
@@ -14,6 +14,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return ({
         getUser: () => dispatch(getUser()),
+        addUploadFileInfo: (user, userId, file) => dispatch(addUploadFileInfo(user, userId, file))
     })
 }
 
@@ -32,20 +33,25 @@ class Profile extends Component {
     }
 
     handleInputChange(event) {
-        // console.log(event.target.files[0]);
         this.setState({
             selectedFile: event.target.files[0],
         })
     }
 
     submit() {
+        this.props.user.map((item) => {
+            if (item.id === parseInt(this.props.userId)) {
+                this.props.addUploadFileInfo(item, this.props.userId, this.state.selectedFile);
+            }
+        })
+
         const data = new FormData();
         data.append('file', this.state.selectedFile);
 
         let url = "/api";
 
         axios.post(url, data)
-            .then(res => { // then print response status
+            .then(res => {
                 console.log(res);
             })
             .catch(err => console.log(err))

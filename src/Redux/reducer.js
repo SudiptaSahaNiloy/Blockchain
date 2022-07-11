@@ -7,6 +7,7 @@ const INITIAL_STATE = {
     userRole: [],
     user: [],
     errorMsg: null,
+    fileInfo: [],
 }
 
 export const reducer = (state = INITIAL_STATE, action) => {
@@ -41,6 +42,11 @@ export const reducer = (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 userInstitution: action.payload.institution,
+            }
+        case actionTypes.UPLOADED_FILE_INFO:
+            return {
+                ...state,
+                fileInfo: action.payload.fileInfo,
             }
         default:
             return state;
