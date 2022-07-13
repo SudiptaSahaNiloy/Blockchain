@@ -58,8 +58,8 @@ class Admin extends Component {
         })
 
         return (
-            <div>
-                < Table striped bordered hover >
+            <div className='p-5'>
+                <Table striped bordered hover>
                     <thead>
                         <tr>
                             <th>#id</th>

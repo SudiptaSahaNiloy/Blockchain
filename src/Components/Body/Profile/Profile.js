@@ -1,26 +1,39 @@
 import React, { Component } from 'react';
 import './Stylesheet/Profile.css';
 import { connect } from 'react-redux';
-import { addUploadFileInfo, getUser } from '../../../Redux/userActionCreators';
+import { addUploadFileInfo, getUploadedFile } from '../../../Redux/fileActionCreators';
 import axios from "axios";
+import Table from 'react-bootstrap/Table';
+import Button from 'react-bootstrap/Button';
+import { authLogout } from '../../../Redux/authActionCreator';
+import { Link } from 'react-router-dom';
 
 const mapStateToProps = (state) => {
     return ({
         userId: state.userId,
         user: state.user,
+        fileInfo: state.fileInfo,
     })
 }
 
 const mapDispatchToProps = (dispatch) => {
     return ({
-        getUser: () => dispatch(getUser()),
-        addUploadFileInfo: (user, userId, file) => dispatch(addUploadFileInfo(user, userId, file))
+        authLogout: () => dispatch(authLogout()),
+        getUploadedFile: () => dispatch(getUploadedFile()),
+        addUploadFileInfo: (user, file) => dispatch(addUploadFileInfo(user, file))
     })
 }
 
 class Profile extends Component {
     componentDidMount() {
-        // this.props.getUser();
+        this.props.getUploadedFile();
+    }
+
+    handOnClick(event) {
+        if (event === 'logout') {
+            this.props.authLogout();
+            window.location.replace('/login');
+        }
     }
 
     constructor() {
@@ -39,9 +52,10 @@ class Profile extends Component {
     }
 
     submit() {
+        window.location.reload();
         this.props.user.map((item) => {
             if (item.id === parseInt(this.props.userId)) {
-                this.props.addUploadFileInfo(item, this.props.userId, this.state.selectedFile);
+                this.props.addUploadFileInfo(item, this.state.selectedFile);
             }
         })
 
@@ -76,6 +90,20 @@ class Profile extends Component {
             }
         })
 
+        const uploadedFiles = this.props.fileInfo.map((item) => {
+            if (item.User_Id === userId) {
+                return (
+                    <tr>
+                        <td>{item.id}</td>
+                        <td>{item.Name}</td>
+                        <td>{item.Size}</td>
+                        <td>{item.Type}</td>
+                        <td>{item.Verified}</td>
+                    </tr >
+                )
+            }
+        })
+
         return (
             <div>
                 <section className="vh-100" style={{ backgroundColor: '#f4f5f7' }}>
@@ -87,13 +115,14 @@ class Profile extends Component {
                                         <div className="col-md-4 gradient-custom text-center text-white"
                                             style={{ borderTopLeftRadius: ".5rem", borderBottomLeftRadius: ".5rem" }}>
                                             <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
-                                                alt="Avatar" className="img-fluid my-5" style={{ width: "80px" }} />
+                                                alt="Avatar" className="img-fluid my-3" style={{ width: "80px" }} />
                                             <h5>{currentUser.Name}</h5>
                                             <p>{currentUser.Role[0]}, {currentUser.Role[1]}, {currentUser.Role[2]}</p>
+                                            <Button className='mb-3' variant="outline-danger" onClick={() => this.handOnClick('logout')}>Logout</Button>
                                             <i className="far fa-edit mb-5"></i>
                                         </div>
                                         <div className="col-md-8 p-3">
-                                            <h5 className='mt-4'>Information</h5>
+                                            <h5>Information</h5>
                                             <hr className="mt-0 mb-4" />
                                             <div className="row pt-1">
                                                 <div className="col-6 mb-3">
@@ -120,6 +149,20 @@ class Profile extends Component {
                                         </div>
                                     </div>
                                 </div>
+                                <Table striped bordered hover>
+                                    <thead>
+                                        <tr>
+                                            <th>File Id</th>
+                                            <th>File Name</th>
+                                            <th>File Size</th>
+                                            <th>File Type</th>
+                                            <th>File Verification</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {uploadedFiles}
+                                    </tbody>
+                                </Table>
                             </div>
                         </div>
                     </div >

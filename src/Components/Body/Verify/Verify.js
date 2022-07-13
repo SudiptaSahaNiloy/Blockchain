@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
-import { getUploadedFile } from '../../../Redux/userActionCreators';
+import { getUploadedFile, updateFileVerification } from '../../../Redux/fileActionCreators';
 import { connect } from 'react-redux';
 
 const mapStateToProps = (state) => {
@@ -13,6 +13,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return ({
     getUploadedFile: () => dispatch(getUploadedFile()),
+    updateFileVerification: (verification, file) => dispatch(updateFileVerification(verification, file))
   })
 }
 
@@ -20,11 +21,17 @@ class Verify extends Component {
   componentDidMount() {
     this.props.getUploadedFile();
   }
+
+  handleOnClick = (verification, file) => {
+    window.location.reload();
+    this.props.updateFileVerification(verification, file);
+  }
+
   render() {
     const fileInfo = this.props.fileInfo;
 
     const verifiedfileData = fileInfo.map((item) => {
-      if (item.Verified) {
+      if (item.Verified !== "Pending...") {
         return (
           < tr >
             <td>{item.id}</td>
@@ -34,9 +41,10 @@ class Verify extends Component {
             <td>{item.User_Id}</td>
             <td>{item.User_Name}</td>
             <td>{item.User_Email}</td>
+            <td>{item.Verified}</td>
             <td>
-              <Button className='me-3' variant='success'>Approve</Button>
-              <Button variant='danger'>Decline</Button>
+              <Button className='me-3' variant='success' onClick={() => this.handleOnClick('approve', item)}>Approve</Button>
+              <Button variant='danger' onClick={() => this.handleOnClick('decline', item)}>Decline</Button>
             </td>
           </tr >
         )
@@ -44,7 +52,7 @@ class Verify extends Component {
     })
 
     const unverifiedfileData = fileInfo.map((item) => {
-      if (item.Verified == false) {
+      if (item.Verified === "Pending...") {
         return (
           < tr >
             <td>{item.id}</td>
@@ -54,9 +62,10 @@ class Verify extends Component {
             <td>{item.User_Id}</td>
             <td>{item.User_Name}</td>
             <td>{item.User_Email}</td>
+            <td>{item.Verified}</td>
             <td>
-              <Button className='me-3' variant='success'>Approve</Button>
-              <Button variant='danger'>Decline</Button>
+              <Button className='me-3' variant='success' onClick={() => this.handleOnClick('approve', item)}>Approve</Button>
+              <Button variant='danger' onClick={() => this.handleOnClick('decline', item)}>Decline</Button>
             </td>
           </tr >
         )
@@ -75,6 +84,7 @@ class Verify extends Component {
               <th>User Id</th>
               <th>User Name</th>
               <th>User Email</th>
+              <th>File Status</th>
               <th>Approve / Decline</th>
             </tr>
           </thead>
@@ -97,6 +107,7 @@ class Verify extends Component {
               <th>User Id</th>
               <th>User Name</th>
               <th>User Email</th>
+              <th>File Status</th>
               <th>Approve / Decline</th>
             </tr>
           </thead>
@@ -109,7 +120,7 @@ class Verify extends Component {
 
     return (
       <div className='p-5'>
-        <h1>Non Verified</h1>
+        <h1>Pending...</h1>
         {nonVerified()}
         <h1 className='mt-5'>Verified</h1>
         {verified()}

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Routes } from 'react-router';
+import { Navigate, Route, Routes } from 'react-router';
 import { connect } from 'react-redux';
 import Home from './Home/Home';
 import Login from './Auth/Auth';
@@ -32,26 +32,61 @@ class Body extends Component {
     let routes = null;
 
     if (this.props.userName !== null && this.props.userId !== null) {
-      if (this.props.userRole[1] === 'admin') {
+      // if (this.props.userRole[0] === 'user') {
+      //   routes = (
+      //     <Routes>
+      //       <Route path="/login" exact element={<Login />} />
+      //       <Route path="/home" exact element={<Home />} />
+      //       <Route path="/profile" exact element={<Profile />} />
+      //       <Route
+      //         path="*"
+      //         element={<Navigate to="/home" replace={true} />}
+      //       />
+      //     </Routes>
+      //   )
+      // }
+      if (this.props.userRole[1] === 'admin' && this.props.userRole[2] === 'verifier') {
         routes = (
           <Routes>
             <Route path="/admin" exact element={<Admin />} />
             <Route path="/login" exact element={<Login />} />
             <Route path="/profile" exact element={<Profile />} />
             <Route path="/verify" exact element={<Verify />} />
-            <Route path="/home" exact element={<Home />} />
-            <Route path="/" exact element={<Home />} />
+            {/* <Route path="/home" exact element={<Home />} /> */}
+            <Route
+              path="*"
+              element={<Navigate to="/login" replace={true} />}
+            />
           </Routes>
         )
       }
-      else if (this.props.userRole[2] === 'verifier') {
+      else if (this.props.userRole[1] !== 'admin' && this.props.userRole[2] === 'verifier') {
         routes = (
           <Routes>
             <Route path="/login" exact element={<Login />} />
             {/* <Route path="/admin" exact element={<Admin />} /> */}
-            <Route path="/home" exact element={<Home />} />
+            {/* <Route path="/home" exact element={<Home />} /> */}
             <Route path="/profile" exact element={<Profile />} />
             <Route path="/verify" exact element={<Verify />} />
+            <Route
+              path="*"
+              element={<Navigate to="/login" replace={true} />}
+            />
+          </Routes>
+        )
+      }
+      else if (this.props.userRole[1] === 'admin' && this.props.userRole[2] !== 'verifier') {
+        routes = (
+          <Routes>
+            <Route path="/login" exact element={<Login />} />
+            <Route path="/admin" exact element={<Admin />} />
+            {/* <Route path="/home" exact element={<Home />} /> */}
+            <Route path="/profile" exact element={<Profile />} />
+            <Route path="/verify" exact element={<Verify />} />
+            <Route
+              path="*"
+              element={<Navigate to="/login" replace={true} />}
+            />
           </Routes>
         )
       }
@@ -59,17 +94,21 @@ class Body extends Component {
         routes = (
           <Routes>
             <Route path="/login" exact element={<Login />} />
-            <Route path="/home" exact element={<Home />} />
+            {/* <Route path="/home" exact element={<Home />} /> */}
             <Route path="/profile" exact element={<Profile />} />
+            {/* <Route
+              path="*"
+              element={<Navigate to="/home" replace={true} />}
+            /> */}
           </Routes>
         )
       }
     } else {
       routes = (
         <Routes>
+          {/* <Route path="/home" exact element={<Home />} /> */}
           <Route path="/login" exact element={<Login />} />
-        </Routes>
-      )
+        </Routes>)
     }
 
     return (

@@ -100,6 +100,7 @@ class Auth extends Component {
                                 <Input
                                     type="checkbox"
                                     onChange={handleChange}
+                                    values={values.admin}
                                     name="adminSelect"
                                     class="form-check-input"
                                     id="exampleCheck1" />
@@ -174,6 +175,7 @@ class Auth extends Component {
         }
 
         const alertMsg = <Alert color="danger">{this.props.errorMsg}</Alert>;
+        const successMsg = <Alert color="succes">{this.props.errorMsg}</Alert>;
 
         return (
             <div className="login-section">
@@ -191,19 +193,23 @@ class Auth extends Component {
                                 password: "",
                                 confirmPassword: "",
                                 instituition: "",
-                                admin: "",
+                                adminSelect: ["off"],
                             }}
 
                             onSubmit={
                                 (values) => {
                                     // console.log(values);
-
                                     // signIn
                                     this.props.auth(values.email, values.password);
 
                                     // signUp
                                     if (this.state.authMode === 'signUp') {
                                         this.props.userData(values);
+                                        this.setState({ authMode: "signInWithPassword" })
+                                    } else {
+                                        setTimeout(() => {
+                                            window.location.replace('/profile');
+                                        }, 100);
                                     }
                                 }
                             }

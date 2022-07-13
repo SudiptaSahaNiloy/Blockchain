@@ -1,6 +1,8 @@
 import axios from "axios";
 import * as actionTypes from './actionTypes';
 
+const URL = 'http://localhost:3001/Users';
+
 export const userRole = (role) => {
     // console.log(role);
     return ({
@@ -12,8 +14,6 @@ export const userRole = (role) => {
 }
 
 export const updateRole = (id, user) => {
-    const URL = 'http://localhost:3001/Users/';
-
     const newRole = [...user.Role];
     // console.log(newRole);
     newRole.push("verifier");
@@ -65,42 +65,6 @@ export const getInstitution = (users) => dispatch => {
     })
 }
 
-export const fileUploaded = (fileInfo) => {
-    // console.log(fileInfo);
-    return {
-        type: actionTypes.UPLOADED_FILE_INFO,
-        payload: {
-            fileInfo: fileInfo
-        }
-    }
-}
-
-export const getUploadedFile = () => dispatch => {
-    const URL = `http://localhost:3001/UploadedFile`;
-
-    axios.get(URL)
-        .then(res => dispatch(fileUploaded(res.data)))
-        .catch(err => console.log(err))
-}
-
-export const addUploadFileInfo = (user, userId, file) => {
-    const URL = `http://localhost:3001/UploadedFile`;
-
-    const uploadedFileData = {
-        User_Id: user.id,
-        User_Name: user.Name,
-        User_Email: user.Email,
-        Name: file.name,
-        Size: file.size,
-        Type: file.type,
-        Verified: false,
-    }
-
-    axios.post(URL, uploadedFileData)
-        .then((res) => console.log(res.data))
-        .catch((err) => console.log(err))
-}
-
 // reducer pathanor kaaj korbe
 export const userInfo = (user) => {
     return ({
@@ -112,7 +76,6 @@ export const userInfo = (user) => {
 }
 
 export const getUser = () => dispatch => {
-    const URL = 'http://localhost:3001/Users';
     axios.get(URL)
         .then(response => {
             dispatch(userInfo(response.data));

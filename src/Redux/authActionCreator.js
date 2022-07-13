@@ -1,6 +1,8 @@
 import axios from "axios";
 import * as actionTypes from "./actionTypes.js";
 
+const URL = 'http://localhost:3001/Users';
+
 export const authSuccess = (userId, userName) => {
     return ({
         type: actionTypes.AUTH_SUCCESS,
@@ -26,7 +28,6 @@ export const authFailed = (errMsg) => {
 
 export const auth = (email, password) => dispatch => {
     // console.log(email, password);
-    const URL = 'http://localhost:3001/Users';
 
     axios.get(URL)
         .then(response => {
@@ -70,14 +71,13 @@ export const authCheck = () => dispatch => {
 
 
 export const userData = (values) => dispatch => {
-    // console.log(values);
     let firstName = values.firstName;
     let lastName = values.lastName;
     const fullName = firstName + " " + lastName;
     let role = [];
     if(values.adminSelect[0] === 'on'){
         role = ["user", "admin"];
-    }else{
+    } else{
         role = ["user", ""];
     }
 
@@ -89,11 +89,10 @@ export const userData = (values) => dispatch => {
         Role: role,
     }
 
-    const URL = 'http://localhost:3001/Users';
     axios.post(URL, userData)
         .then(response => {
             // console.log("hi");
-            // console.log(response);
+            console.log(response);
             dispatch(authSuccess(userData.Id, userData.Name));
         })
         .catch(err => console.log(err))

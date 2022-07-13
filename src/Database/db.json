@@ -30,9 +30,7 @@
       "Institution": "BUET",
       "Role": [
         "user",
-        "admin",
-        "verifier",
-        "verifier"
+        "admin"
       ],
       "id": 3
     },
@@ -43,7 +41,7 @@
       "Institution": "CUET",
       "Role": [
         "user",
-        "admin",
+        "",
         "verifier"
       ],
       "id": 4
@@ -59,6 +57,17 @@
         "verifier"
       ],
       "id": 5
+    },
+    {
+      "Name": "NG Saha",
+      "Email": "ngsaha1772@gmail.com",
+      "Password": "bangladesh",
+      "Institution": "CUET",
+      "Role": [
+        "user",
+        ""
+      ],
+      "id": 6
     }
   ],
   "UploadedFile": [
@@ -69,7 +78,7 @@
       "Name": "3949076.jpg",
       "Size": 73254,
       "Type": "image/jpeg",
-      "Verified": false,
+      "Verified": "Approved",
       "id": 1
     },
     {
@@ -79,7 +88,7 @@
       "Name": "106182.jpg",
       "Size": 427095,
       "Type": "image/jpeg",
-      "Verified": false,
+      "Verified": "Denied",
       "id": 2
     },
     {
@@ -89,8 +98,38 @@
       "Name": "wp8137283-lavender-pc-anime-wallpapers.png",
       "Size": 10768517,
       "Type": "image/png",
-      "Verified": true,
+      "Verified": "Denied",
       "id": 3
+    },
+    {
+      "User_Id": 1,
+      "User_Name": "Sudipta Saha Niloy",
+      "User_Email": "niloy305968@gmail.com",
+      "Name": "wallpaperflare.com_wallpaper.jpg",
+      "Size": 510760,
+      "Type": "image/jpeg",
+      "Verified": "Pending...",
+      "id": 4
+    },
+    {
+      "User_Id": 1,
+      "User_Name": "Sudipta Saha Niloy",
+      "User_Email": "niloy305968@gmail.com",
+      "Name": "moonwalk.jpg",
+      "Size": 2998475,
+      "Type": "image/jpeg",
+      "Verified": "Pending...",
+      "id": 5
+    },
+    {
+      "User_Id": 1,
+      "User_Name": "Sudipta Saha Niloy",
+      "User_Email": "niloy305968@gmail.com",
+      "Name": "106182.jpg",
+      "Size": 427095,
+      "Type": "image/jpeg",
+      "Verified": "Pending...",
+      "id": 6
     }
   ]
 }
