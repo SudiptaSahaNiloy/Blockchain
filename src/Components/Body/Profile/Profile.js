@@ -7,6 +7,7 @@ import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import { authLogout } from '../../../Redux/authActionCreator';
 import { Link } from 'react-router-dom';
+import Home from '../Home/Home';
 
 const mapStateToProps = (state) => {
     return ({
@@ -29,24 +30,28 @@ class Profile extends Component {
         this.props.getUploadedFile();
     }
 
+    constructor() {
+        super();
+        this.state = {
+            selectedFile: '',
+            applyForAdmin: true,
+        }
+
+        this.handleInputChange = this.handleInputChange.bind(this);
+    }
+
     handOnClick(event) {
         if (event === 'logout') {
             this.props.authLogout();
             window.location.replace('/login');
         }
 
-        if (event === 'applyForAdmin'){
-            window.location.replace('/home');
+        if (event === 'applyForAdmin') {
+            this.setState({
+                applyForAdmin: !this.state.applyForAdmin,
+            })
+            // window.location.replace('/home');
         }
-    }
-
-    constructor() {
-        super();
-        this.state = {
-            selectedFile: '',
-        }
-
-        this.handleInputChange = this.handleInputChange.bind(this);
     }
 
     handleInputChange(event) {
@@ -158,6 +163,7 @@ class Profile extends Component {
                                         </div>
                                     </div>
                                 </div>
+                                {this.state.applyForAdmin ? <Home id={this.props.userId} user={this.props.user} /> : <div>reject</div>}
                                 <Table striped bordered hover>
                                     <thead>
                                         <tr>

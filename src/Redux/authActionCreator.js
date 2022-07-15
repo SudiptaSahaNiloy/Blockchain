@@ -74,12 +74,12 @@ export const userData = (values) => dispatch => {
     let firstName = values.firstName;
     let lastName = values.lastName;
     const fullName = firstName + " " + lastName;
-    let role = [];
-    if(values.adminSelect[0] === 'on'){
-        role = ["user", "admin"];
-    } else{
-        role = ["user", ""];
-    }
+    let role = ["user", "", ""];
+    // if(values.adminSelect[0] === 'on'){
+    //     role = ["user", "admin"];
+    // } else{
+    //     role = ["user", ""];
+    // }
 
     const userData = {
         Name: fullName,

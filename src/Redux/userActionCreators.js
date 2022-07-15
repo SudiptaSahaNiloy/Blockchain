@@ -1,7 +1,7 @@
 import axios from "axios";
 import * as actionTypes from './actionTypes';
 
-const URL = 'http://localhost:3001/Users';
+const URL = 'http://localhost:3001/Users/';
 
 export const userRole = (role) => {
     // console.log(role);
@@ -13,14 +13,19 @@ export const userRole = (role) => {
     })
 }
 
-export const updateRole = (id, user) => {
-    const newRole = [...user.Role];
-    // console.log(newRole);
-    newRole.push("verifier");
-    // console.log(newRole);
+export const updateRole = (id, currentUser, role) => {
+    let newRole = [];
+
+    if (role === 'admin') {
+        newRole = [...currentUser.Role];
+        newRole[1] = "admin";
+    } else {
+        newRole = [...currentUser.Role];
+        newRole[2] = "verifier";
+    }
 
     axios.put(URL + id, {
-        ...user,
+        ...currentUser,
         Role: newRole,
     })
         .then(resp => {
@@ -76,7 +81,7 @@ export const userInfo = (user) => {
 }
 
 export const getUser = () => dispatch => {
-    axios.get(URL) 
+    axios.get(URL)
         .then(response => {
             dispatch(userInfo(response.data));
             dispatch(getInstitution(response.data));

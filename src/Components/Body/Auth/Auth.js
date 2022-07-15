@@ -95,7 +95,7 @@ class Auth extends Component {
                                     placeholder="Current Instituition" />
                             </FormGroup>
                         </Col><br />
-                        <Col md={12}>
+                        {/* <Col md={12}>
                             <FormGroup>
                                 <Input
                                     type="checkbox"
@@ -108,7 +108,7 @@ class Auth extends Component {
                                     Admin?
                                 </Label>
                             </FormGroup>
-                        </Col><br />
+                        </Col><br /> */}
                     </Row>
                     <div>
                         Already signed up?

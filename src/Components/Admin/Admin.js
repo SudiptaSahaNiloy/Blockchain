@@ -25,7 +25,7 @@ class Admin extends Component {
             verifier = true;
         }
         if (verifier === false) {
-            this.props.updateRole(id, user);
+            this.props.updateRole(id, user, "verifier");
             window.location.reload();
         }
     }
