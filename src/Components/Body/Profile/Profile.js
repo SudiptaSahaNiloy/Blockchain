@@ -34,6 +34,10 @@ class Profile extends Component {
             this.props.authLogout();
             window.location.replace('/login');
         }
+
+        if (event === 'applyForAdmin'){
+            window.location.replace('/home');
+        }
     }
 
     constructor() {
@@ -143,6 +147,11 @@ class Profile extends Component {
                                                         <div className="col-4">
                                                             <button type="submit" className="btn btn-dark" onClick={() => this.submit()}>Upload</button>
                                                         </div>
+                                                    </div>
+                                                    <div className="row">
+                                                        <Button className='mt-4 ' variant="primary" onClick={() => this.handOnClick('applyForAdmin')}>
+                                                            Apply For Admin
+                                                        </Button>
                                                     </div>
                                                 </div>
                                             </div>

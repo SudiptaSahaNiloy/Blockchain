@@ -76,7 +76,7 @@ export const userInfo = (user) => {
 }
 
 export const getUser = () => dispatch => {
-    axios.get(URL)
+    axios.get(URL) 
         .then(response => {
             dispatch(userInfo(response.data));
             dispatch(getInstitution(response.data));

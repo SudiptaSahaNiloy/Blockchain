@@ -52,7 +52,7 @@ class Body extends Component {
             <Route path="/login" exact element={<Login />} />
             <Route path="/profile" exact element={<Profile />} />
             <Route path="/verify" exact element={<Verify />} />
-            {/* <Route path="/home" exact element={<Home />} /> */}
+            <Route path="/home" exact element={<Home />} />
             <Route
               path="*"
               element={<Navigate to="/login" replace={true} />}
@@ -65,7 +65,7 @@ class Body extends Component {
           <Routes>
             <Route path="/login" exact element={<Login />} />
             {/* <Route path="/admin" exact element={<Admin />} /> */}
-            {/* <Route path="/home" exact element={<Home />} /> */}
+            <Route path="/home" exact element={<Home />} />
             <Route path="/profile" exact element={<Profile />} />
             <Route path="/verify" exact element={<Verify />} />
             <Route
@@ -80,7 +80,7 @@ class Body extends Component {
           <Routes>
             <Route path="/login" exact element={<Login />} />
             <Route path="/admin" exact element={<Admin />} />
-            {/* <Route path="/home" exact element={<Home />} /> */}
+            <Route path="/home" exact element={<Home />} />
             <Route path="/profile" exact element={<Profile />} />
             <Route path="/verify" exact element={<Verify />} />
             <Route
@@ -94,7 +94,7 @@ class Body extends Component {
         routes = (
           <Routes>
             <Route path="/login" exact element={<Login />} />
-            {/* <Route path="/home" exact element={<Home />} /> */}
+            <Route path="/home" exact element={<Home />} />
             <Route path="/profile" exact element={<Profile />} />
             {/* <Route
               path="*"

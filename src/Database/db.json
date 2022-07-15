@@ -68,6 +68,17 @@
         ""
       ],
       "id": 6
+    },
+    {
+      "Name": "Niloy saha",
+      "Email": "niloy123@gmail.com",
+      "Password": "bangladesh",
+      "Institution": "CUET",
+      "Role": [
+        "user",
+        ""
+      ],
+      "id": 7
     }
   ],
   "UploadedFile": [
