@@ -34,7 +34,7 @@ class Profile extends Component {
         super();
         this.state = {
             selectedFile: '',
-            applyForAdmin: true,
+            applyForAdmin: false,
         }
 
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -155,7 +155,7 @@ class Profile extends Component {
                                                     </div>
                                                     <div className="row">
                                                         <Button className='mt-4 ' variant="primary" onClick={() => this.handOnClick('applyForAdmin')}>
-                                                            Apply For Admin
+                                                            Click here for admin verification
                                                         </Button>
                                                     </div>
                                                 </div>
@@ -163,7 +163,7 @@ class Profile extends Component {
                                         </div>
                                     </div>
                                 </div>
-                                {this.state.applyForAdmin ? <Home id={this.props.userId} user={this.props.user} /> : <div>reject</div>}
+                                {this.state.applyForAdmin ? <Home id={this.props.userId} user={this.props.user} /> : null}
                                 <Table striped bordered hover>
                                     <thead>
                                         <tr>

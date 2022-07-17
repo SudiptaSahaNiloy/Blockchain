@@ -1,17 +1,17 @@
 import { useState, useEffect } from "react";
 import { ethers } from "ethers";
-import erc20abi from "./ERC20ABI/ERC20abi.json";
+import erc20abi from "../../../ERC20ABI/ERC20abi.json";
 import ErrorMessage from "./Error/ErrorMessages";
 import TxList from "./TxList/TxList";
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
-import Card from 'react-bootstrap/Card';
 import { connect } from 'react-redux';
 import { updateRole } from "../../../Redux/userActionCreators";
+import Alert from 'react-bootstrap/Alert';
 
 const mapDispatchToProps = (dispatch) => {
     return ({
-        updateRole: (id, user, role) => dispatch(updateRole(id, user, role))
+        updateRole: (id, user, role) => dispatch(updateRole(id, user, role)),
     })
 }
 
@@ -30,8 +30,16 @@ function Home(props) {
         address: "-",
         balance: "-"
     });
+    const [alertMsg, setalertMsg] = useState({
+        positiveMsg: "",
+        negativeMsg: "",
+    });
+    const [showBalance, setshowBalance] = useState(false);
 
     useEffect(() => {
+        addToContract();
+        getMyBalance();
+
         if (contractInfo.address !== "-") {
             const provider = new ethers.providers.Web3Provider(window.ethereum);
             const erc20 = new ethers.Contract(
@@ -61,14 +69,11 @@ function Home(props) {
         }
     }, [contractInfo.address]);
 
-    const handleSubmit = async () => {
-        // e.preventDefault();
-        // const data = new FormData(e.target);
+    const addToContract = async () => {
         const provider = new ethers.providers.Web3Provider(window.ethereum);
 
         const contractAddress = "0xd2b375A7005e6e0081C36D68db405Ff1F4CD3b8c";
         const erc20 = new ethers.Contract(contractAddress, erc20abi, provider);
-        // const erc20 = new ethers.Contract(data.get("addr"), erc20abi, provider);
 
         const tokenName = await erc20.name();
         const tokenSymbol = await erc20.symbol();
@@ -76,7 +81,6 @@ function Home(props) {
 
         setContractInfo({
             address: contractAddress,
-            // address: data.get("addr"),
             tokenName,
             tokenSymbol,
             totalSupply
@@ -95,32 +99,48 @@ function Home(props) {
             address: signerAddress,
             balance: String(balance)
         });
+    };
 
-        if (balance > 100) {
+    const applyForAdmin = () => {
+        if (balanceInfo.balance >= 100) {
+            setalertMsg({
+                positiveMsg: "User can be given the role of an Admin",
+                negativeMsg: "",
+            });
+
             let currentUser = null;
 
             props.user.map((item) => {
-                // console.log(item);
-                // console.log(parseInt(id));
                 if (item.id === parseInt(props.id)) {
-                    // console.log(item);
                     currentUser = Object.assign({}, item);
                 }
             })
 
-            console.log(currentUser.Role);
             let admin = false;
             if (currentUser.Role[1] === 'admin') {
+                setalertMsg({
+                    positiveMsg: "User is already given the role of an admin",
+                    negativeMsg: "",
+                });
+                setTimeout(() => {
+                    window.location.reload();
+                }, 3000);
                 admin = true;
             }
             if (admin === false) {
+                setTimeout(() => {
+                    window.location.reload();
+                }, 3000);
                 props.updateRole(props.id, currentUser, "admin");
-                window.location.reload();
             }
-            // props.updateRole(props.id, currentUser, 'admin');
-            // console.log("borolokx");
+
+        } else {
+            setalertMsg({
+                positiveMsg: "",
+                negativeMsg: "User can't be an admin because of low balance"
+            });
         }
-    };
+    }
 
     const handleTransfer = async (e) => {
         e.preventDefault();
@@ -128,9 +148,32 @@ function Home(props) {
         const provider = new ethers.providers.Web3Provider(window.ethereum);
         await provider.send("eth_requestAccounts", []);
         const signer = await provider.getSigner();
-        const erc20 = new ethers.Contract(contractInfo.address, erc20abi, signer);
+        const erc20 = new ethers.Contract(props.contractAddress, erc20abi, signer);
         await erc20.transfer(data.get("recipient"), data.get("amount"));
     };
+
+    const positiveMsg = () => {
+        if (alertMsg.positiveMsg !== "") {
+            return (
+                <Alert variant={'success'}>
+                    {alertMsg.positiveMsg}
+                </Alert>
+            )
+        } else if (alertMsg.negativeMsg !== "") {
+            return (
+                <Alert variant={'danger'}>
+                    {alertMsg.negativeMsg}
+                </Alert>
+            )
+        }
+        else {
+            return null;
+        }
+    }
+
+    const showMyBalance = () => {
+        setshowBalance(!showBalance);
+    }
 
     return (
         <div
@@ -140,7 +183,7 @@ function Home(props) {
                 // height: "60vh",
             }}>
             <div className="row" style={{
-                height: "58vh",
+                // height: "58vh",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
@@ -202,7 +245,7 @@ function Home(props) {
                 <div className="col-6 pb-4" style={{
                     width: "40vw"
                 }}>
-                    <div className="row px-3">
+                    {/* <div className="row px-3">
                         <button
                             type="submit"
                             className="btn btn-primary submit-button"
@@ -210,38 +253,51 @@ function Home(props) {
                         >
                             Connect to wallet
                         </button>
-                    </div>
+                    </div> */}
 
-                    <div className="credit-card mt-3 w-full lg:w-3/4 sm:w-auto shadow-lg mx-auto rounded-xl bg-white" style={{ height: "18vh" }}>
+                    <div className="credit-card mt-3 w-full lg:w-3/4 sm:w-auto shadow-lg mx-auto rounded-xl bg-white" style={{ height: "31vh" }}>
                         <div className="p-3 row px-4">
                             <button
-                                onClick={getMyBalance}
+                                onClick={showMyBalance}
                                 type="submit"
                                 className="btn btn-primary submit-button focus:ring focus:outline-none w-full"
                             >
-                                Get my balance
+                                Show my balance
                             </button>
                         </div>
-                        <div className="px-4">
-                            <div className="overflow-x-auto">
-                                <table className="table w-full">
-                                    <thead>
-                                        <tr>
-                                            <th>Address</th>
-                                            <th>Balance</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <th>{balanceInfo.address}</th>
-                                            <td>{balanceInfo.balance}</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                        {showBalance ?
+                            <div className="px-4">
+                                <div className="overflow-x-auto">
+                                    <table className="table w-full">
+                                        <thead>
+                                            <tr>
+                                                <th>Address</th>
+                                                <th>Balance</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th>{balanceInfo.address}</th>
+                                                <td>{balanceInfo.balance}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div> : null}
+                        <div className="p-3 row px-4">
+                            <button
+                                type="submit"
+                                className="btn btn-primary submit-button"
+                                onClick={() => applyForAdmin()}
+                            >
+                                Apply for Admin
+                            </button>
+                        </div>
+                        <div>
+                            {positiveMsg()}
                         </div>
                     </div>
-                    <div className="m-4 credit-card w-full lg:w-3/4 sm:w-auto shadow-lg mx-auto rounded-xl bg-white" style={{
+                    {/* <div className="m-4 credit-card w-full lg:w-3/4 sm:w-auto shadow-lg mx-auto rounded-xl bg-white" style={{
                         height: "30vh",
                     }}>
                         <div className="mt-4 p-4">
@@ -267,19 +323,19 @@ function Home(props) {
                                             placeholder="Amount to transfer"
                                         />
                                     </div>
-                                    {/* <footer className="p-4"> */}
-                                    <button
-                                        type="submit"
-                                        className="btn btn-primary submit-button focus:ring focus:outline-none w-full mt-4"
-                                    >
-                                        Transfer
-                                    </button>
-                                    {/* </footer> */}
+                                    <footer className="p-4">
+                                        <button
+                                            type="submit"
+                                            className="btn btn-primary submit-button focus:ring focus:outline-none w-full mt-4"
+                                        >
+                                            Transfer
+                                        </button>
+                                    </footer>
                                 </div>
 
                             </Form>
                         </div>
-                    </div>
+                    </div> */}
 
                 </div>
 
