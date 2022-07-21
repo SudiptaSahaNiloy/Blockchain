@@ -8,6 +8,8 @@ import abi from "../../../ABI/abi.json";
 
 const mapStateToProps = (state) => {
   return {
+    user: state.user,
+    userInstitution: state.userInstitution,
     fileInfo: state.fileInfo,
     contractAddress: state.contractAddress,
   }
@@ -32,19 +34,25 @@ class Verify extends Component {
     const contract = new ethers.Contract(this.props.contractAddress, abi, signer);
     // console.log(await contract.checkIfVerifiers("0x95220090E903d5DCd99D3406A17aF3a6AEBe390C"));
 
-    // console.log(file.id);
+    // console.log(typeof(file.id));
+    // console.log(typeof(parseInt(file.id)));
     // console.log(verification);
 
     if (verification === 'approve') {
-      await contract.vote(1, 1);
+      await contract.vote(file.id, 1);
     } else {
-      await contract.vote(1, 2);
+      await contract.vote(file.id, 2);
     }
     window.location.reload();
   }
 
   render() {
-    const fileInfo = this.props.fileInfo;
+    const fileInfo = [];
+    this.props.fileInfo.map((item) => {
+      if (item.User_Institution === this.props.userInstitution) {
+        fileInfo.push(item);
+      }
+    })
 
     const verifiedfileData = fileInfo.map((item) => {
       if (item.Verified !== "Pending...") {

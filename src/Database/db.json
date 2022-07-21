@@ -21,7 +21,7 @@
       "Role": [
         "user",
         "admin",
-        ""
+        "verifier"
       ],
       "id": 2
     },
@@ -107,6 +107,7 @@
       "Size": 73254,
       "Type": "image/jpeg",
       "Verified": "Approved",
+      "User_Institution": "CUET",
       "id": 1
     },
     {
@@ -117,6 +118,7 @@
       "Size": 427095,
       "Type": "image/jpeg",
       "Verified": "Denied",
+      "User_Institution": "CUET",
       "id": 2
     },
     {
@@ -127,6 +129,7 @@
       "Size": 10768517,
       "Type": "image/png",
       "Verified": "Denied",
+      "User_Institution": "CUET",
       "id": 3
     },
     {
@@ -137,6 +140,7 @@
       "Size": 510760,
       "Type": "image/jpeg",
       "Verified": "Approved",
+      "User_Institution": "RUET",
       "id": 4
     },
     {
@@ -147,6 +151,7 @@
       "Size": 2998475,
       "Type": "image/jpeg",
       "Verified": "Pending...",
+      "User_Institution": "KUET",
       "id": 5
     },
     {
@@ -157,6 +162,7 @@
       "Size": 427095,
       "Type": "image/jpeg",
       "Verified": "Pending...",
+      "User_Institution": "BUET",
       "id": 6
     }
   ]

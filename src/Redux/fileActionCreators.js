@@ -46,6 +46,7 @@ export const addUploadFileInfo = (user, file) => {
         User_Id: user.id,
         User_Name: user.Name,
         User_Email: user.Email,
+        User_Institution: user.Institution,
         Name: file.name,
         Size: file.size,
         Type: file.type,
