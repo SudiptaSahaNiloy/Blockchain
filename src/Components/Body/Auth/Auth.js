@@ -95,20 +95,16 @@ class Auth extends Component {
                                     placeholder="Current Instituition" />
                             </FormGroup>
                         </Col><br />
-                        {/* <Col md={12}>
+                        <Col md={12}>
                             <FormGroup>
                                 <Input
-                                    type="checkbox"
+                                    type="text"
                                     onChange={handleChange}
-                                    values={values.admin}
-                                    name="adminSelect"
-                                    class="form-check-input"
-                                    id="exampleCheck1" />
-                                <Label class="form-check-label" for="exampleCheck1">
-                                    Admin?
-                                </Label>
+                                    name="walletAddress"
+                                    values={values.walletAddress}
+                                    placeholder="Wallet Address" />
                             </FormGroup>
-                        </Col><br /> */}
+                        </Col><br />
                     </Row>
                     <div>
                         Already signed up?
@@ -175,12 +171,12 @@ class Auth extends Component {
         }
 
         const alertMsg = <Alert color="danger">{this.props.errorMsg}</Alert>;
-        const successMsg = <Alert color="succes">{this.props.errorMsg}</Alert>;
+        // const successMsg = <Alert color="succes">{this.props.errorMsg}</Alert>;
 
         return (
             <div className="login-section">
                 <div className="row">
-                    {this.props.errorMsg !== null ? alertMsg : null}
+                    {/* {this.props.errorMsg !== null ? alertMsg : null} */}
                     <div className="col-md-8 login-image-section">
                         {/* <img src="Images/Login.jpg" className="img-fluid" alt="Login_Car" /> */}
                     </div>
@@ -193,6 +189,7 @@ class Auth extends Component {
                                 password: "",
                                 confirmPassword: "",
                                 instituition: "",
+                                walletAddress: "",
                                 adminSelect: ["off"],
                             }}
 

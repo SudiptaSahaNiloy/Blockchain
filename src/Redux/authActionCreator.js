@@ -40,12 +40,12 @@ export const auth = (email, password) => dispatch => {
                     dispatch(authSuccess(response.data[id].id, response.data[id].Name));
                 }
             })
-            if(authenticated === 0){
+            if (authenticated === 0) {
                 dispatch(authFailed("Incorrect Email or Password. Try Again"));
                 setTimeout(() => {
                     dispatch(authFailed(null));
                 }, 4000);
-            } 
+            }
         })
 }
 
@@ -86,12 +86,12 @@ export const userData = (values) => dispatch => {
         Email: values.email,
         Password: values.password,
         Institution: values.instituition,
+        WalletAddress: values.walletAddress,
         Role: role,
     }
 
     axios.post(URL, userData)
         .then(response => {
-            // console.log("hi");
             console.log(response);
             dispatch(authSuccess(userData.Id, userData.Name));
         })

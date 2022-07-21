@@ -5,6 +5,7 @@
       "Email": "niloy305968@gmail.com",
       "Password": "bangladesh",
       "Institution": "CUET",
+      "WalletAddress": "0x95220090E903d5DCd99D3406A17aF3a6AEBe390C",
       "Role": [
         "user",
         "admin",
@@ -83,6 +84,18 @@
         ""
       ],
       "id": 7
+    },
+    {
+      "Name": "Prithwi Saha",
+      "Email": "prithwi@gmail.com",
+      "Password": "bangladesh",
+      "Institution": "CUET",
+      "Role": [
+        "user",
+        "",
+        ""
+      ],
+      "id": 8
     }
   ],
   "UploadedFile": [
@@ -123,7 +136,7 @@
       "Name": "wallpaperflare.com_wallpaper.jpg",
       "Size": 510760,
       "Type": "image/jpeg",
-      "Verified": "Pending...",
+      "Verified": "Approved",
       "id": 4
     },
     {

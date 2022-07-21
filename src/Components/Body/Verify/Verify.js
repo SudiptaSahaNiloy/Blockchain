@@ -3,10 +3,13 @@ import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import { getUploadedFile, updateFileVerification } from '../../../Redux/fileActionCreators';
 import { connect } from 'react-redux';
+import { ethers } from "ethers";
+import abi from "../../../ABI/abi.json";
 
 const mapStateToProps = (state) => {
   return {
     fileInfo: state.fileInfo,
+    contractAddress: state.contractAddress,
   }
 }
 
@@ -22,9 +25,22 @@ class Verify extends Component {
     this.props.getUploadedFile();
   }
 
-  handleOnClick = (verification, file) => {
+  handleOnClick = async (verification, file) => {
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    await provider.send("eth_requestAccounts", []);
+    const signer = await provider.getSigner(); //connect to metamask
+    const contract = new ethers.Contract(this.props.contractAddress, abi, signer);
+    // console.log(await contract.checkIfVerifiers("0x95220090E903d5DCd99D3406A17aF3a6AEBe390C"));
+
+    // console.log(file.id);
+    // console.log(verification);
+
+    if (verification === 'approve') {
+      await contract.vote(1, 1);
+    } else {
+      await contract.vote(1, 2);
+    }
     window.location.reload();
-    this.props.updateFileVerification(verification, file);
   }
 
   render() {
@@ -41,11 +57,6 @@ class Verify extends Component {
             <td>{item.User_Id}</td>
             <td>{item.User_Name}</td>
             <td>{item.User_Email}</td>
-            <td>{item.Verified}</td>
-            <td>
-              <Button className='me-3' variant='success' onClick={() => this.handleOnClick('approve', item)}>Approve</Button>
-              <Button variant='danger' onClick={() => this.handleOnClick('decline', item)}>Decline</Button>
-            </td>
           </tr >
         )
       }
@@ -62,7 +73,6 @@ class Verify extends Component {
             <td>{item.User_Id}</td>
             <td>{item.User_Name}</td>
             <td>{item.User_Email}</td>
-            <td>{item.Verified}</td>
             <td>
               <Button className='me-3' variant='success' onClick={() => this.handleOnClick('approve', item)}>Approve</Button>
               <Button variant='danger' onClick={() => this.handleOnClick('decline', item)}>Decline</Button>
@@ -84,7 +94,6 @@ class Verify extends Component {
               <th>User Id</th>
               <th>User Name</th>
               <th>User Email</th>
-              <th>File Status</th>
               <th>Approve / Decline</th>
             </tr>
           </thead>
@@ -107,8 +116,6 @@ class Verify extends Component {
               <th>User Id</th>
               <th>User Name</th>
               <th>User Email</th>
-              <th>File Status</th>
-              <th>Approve / Decline</th>
             </tr>
           </thead>
           <tbody>
@@ -122,7 +129,7 @@ class Verify extends Component {
       <div className='p-5'>
         <h1>Pending...</h1>
         {nonVerified()}
-        <h1 className='mt-5'>Verified</h1>
+        <h1 className='mt-5'>Done Voting</h1>
         {verified()}
       </div>
     )

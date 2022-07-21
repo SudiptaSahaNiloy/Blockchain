@@ -32,9 +32,6 @@ class Header extends Component {
                 <div style={{ width: "100%" }}>
                     <Collapse isOpen={this.state.isOpen} navbar>
                         <Nav className="mr-auto" navbar>
-                            <NavItem>
-                                <NavLink href="/home">Home</NavLink>
-                            </NavItem>
                             {this.props.userRole[1] === 'admin' ?
                                 <NavItem>
                                     <NavLink href="/admin">Admin</NavLink>
