@@ -1,5 +1,8 @@
 import axios from "axios";
 import * as actionTypes from './actionTypes';
+import { contractAddress } from "../Contract/contractAddress";
+import abi from '../ABI/abi.json';
+import { ethers } from "ethers";
 
 const URL = 'http://localhost:3001/UploadedFile/';
 
@@ -7,7 +10,7 @@ export const updateFileVerification = (verification, file) => {
     const file_id = file.id;
 
     let Verified = false;
-    console.log(Verified);
+    // console.log(Verified);
 
     if (verification === 'approve') {
         Verified = 'Approved';
@@ -41,7 +44,17 @@ export const getUploadedFile = () => dispatch => {
         .catch(err => console.log(err))
 }
 
-export const addUploadFileInfo = (user, file) => {
+export const uploadFileInfoToContract = async (res) => {
+    console.log(res);
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    await provider.send("eth_requestAccounts", []);
+    const signer = await provider.getSigner(); //connect to metamask
+    const contract = new ethers.Contract(contractAddress, abi, signer);
+
+    await contract.documentRegistration(res.id, "des", "url");
+}
+
+export const addUploadFileInfo = (user, file) => dispatch => {
     const uploadedFileData = {
         User_Id: user.id,
         User_Name: user.Name,
@@ -54,6 +67,6 @@ export const addUploadFileInfo = (user, file) => {
     }
 
     axios.post(URL, uploadedFileData)
-        .then((res) => console.log(res.data))
+        .then((res) => dispatch(uploadFileInfoToContract(res.data)))
         .catch((err) => console.log(err))
 }

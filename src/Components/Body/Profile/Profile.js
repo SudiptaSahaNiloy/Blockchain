@@ -8,6 +8,8 @@ import Button from 'react-bootstrap/Button';
 import { authLogout } from '../../../Redux/authActionCreator';
 import { Link } from 'react-router-dom';
 import Home from '../Home/Home';
+import { ethers } from 'ethers';
+import abi from '../../../ABI/abi.json';
 
 const mapStateToProps = (state) => {
     return ({
@@ -61,13 +63,6 @@ class Profile extends Component {
     }
 
     submit() {
-        window.location.reload();
-        this.props.user.map((item) => {
-            if (item.id === parseInt(this.props.userId)) {
-                this.props.addUploadFileInfo(item, this.state.selectedFile);
-            }
-        })
-
         const data = new FormData();
         data.append('file', this.state.selectedFile);
 
@@ -78,6 +73,12 @@ class Profile extends Component {
                 console.log(res);
             })
             .catch(err => console.log(err))
+
+        this.props.user.map((item) => {
+            if (item.id === parseInt(this.props.userId)) {
+                this.props.addUploadFileInfo(item, this.state.selectedFile);
+            }
+        })
     }
 
     render() {

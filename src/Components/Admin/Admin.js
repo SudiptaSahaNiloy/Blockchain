@@ -8,12 +8,12 @@ import { ethers } from "ethers";
 import abi from "../../ABI/abi.json";
 import InputGroup from 'react-bootstrap/InputGroup';
 import Alert from 'react-bootstrap/Alert';
+import { contractAddress } from '../../Contract/contractAddress';
 
 const mapStateToProps = (state) => {
     return ({
         user: state.user,
         userInstitution: state.userInstitution,
-        contractAddress: state.contractAddress,
     })
 }
 
@@ -34,12 +34,12 @@ class Admin extends Component {
             const provider = new ethers.providers.Web3Provider(window.ethereum);
             await provider.send("eth_requestAccounts", []);
             const signer = await provider.getSigner(); //connect to metamask
-            const contract = new ethers.Contract(this.props.contractAddress, abi, signer);
+            const contract = new ethers.Contract(contractAddress, abi, signer);
             await contract.addVerifiers(user.WalletAddress);
 
             if (await contract.checkIfVerifiers(user.WalletAddress)) {
                 window.location.reload();
-                // this.props.updateRole(id, user, "verifier");
+                this.props.updateRole(id, user, "verifier");
             }
         }
     }

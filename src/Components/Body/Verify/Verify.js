@@ -5,13 +5,14 @@ import { getUploadedFile, updateFileVerification } from '../../../Redux/fileActi
 import { connect } from 'react-redux';
 import { ethers } from "ethers";
 import abi from "../../../ABI/abi.json";
+import { contractAddress } from '../../../Contract/contractAddress';
 
 const mapStateToProps = (state) => {
   return {
     user: state.user,
     userInstitution: state.userInstitution,
     fileInfo: state.fileInfo,
-    contractAddress: state.contractAddress,
+    // contractAddress: state.contractAddress,
   }
 }
 
@@ -31,19 +32,29 @@ class Verify extends Component {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     await provider.send("eth_requestAccounts", []);
     const signer = await provider.getSigner(); //connect to metamask
-    const contract = new ethers.Contract(this.props.contractAddress, abi, signer);
+    const contract = new ethers.Contract(contractAddress, abi, signer);
     // console.log(await contract.checkIfVerifiers("0x95220090E903d5DCd99D3406A17aF3a6AEBe390C"));
 
     // console.log(typeof(file.id));
     // console.log(typeof(parseInt(file.id)));
-    // console.log(verification);
+    // console.log(contract);
+    // const balance = await contract.checkBalance();
+    // console.log(parseInt(balance));
+    // console.log(await contract.checkApplicationStatus(1));
 
-    if (verification === 'approve') {
-      await contract.vote(file.id, 1);
-    } else {
-      await contract.vote(file.id, 2);
-    }
-    window.location.reload();
+    // if (verification === 'approve') {
+    //   await contract.vote(file.id, 1);
+    // } else {
+    //   await contract.vote(file.id, 2);
+    // }
+
+    console.log(await contract.checkApplicationStatus(1));
+    // if (await contract.checkApplicationStatus(file.id))
+    //   this.props.updateFileVerification('approve', file);
+    // else {
+    //   this.props.updateFileVerification('decline', file);
+    // }
+    // window.location.reload();
   }
 
   render() {

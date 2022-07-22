@@ -8,6 +8,7 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import { connect } from 'react-redux';
 import { updateRole } from "../../../Redux/userActionCreators";
 import Alert from 'react-bootstrap/Alert';
+import { contractAddress } from "../../../Contract/contractAddress";
 
 const mapDispatchToProps = (dispatch) => {
     return ({
