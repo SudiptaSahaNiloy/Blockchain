@@ -33,24 +33,16 @@ class Verify extends Component {
     await provider.send("eth_requestAccounts", []);
     const signer = await provider.getSigner(); //connect to metamask
     const contract = new ethers.Contract(contractAddress, abi, signer);
-    // console.log(await contract.checkIfVerifiers("0x95220090E903d5DCd99D3406A17aF3a6AEBe390C"));
 
-    // console.log(typeof(file.id));
-    // console.log(typeof(parseInt(file.id)));
-    // console.log(contract);
-    // const balance = await contract.checkBalance();
-    // console.log(parseInt(balance));
-    // console.log(await contract.checkApplicationStatus(1));
+    if (verification === 'approve') {
+      await contract.vote(file.id, 1);
+    } else {
+      await contract.vote(file.id, 2);
+    }
 
-    // if (verification === 'approve') {
-    //   await contract.vote(file.id, 1);
-    // } else {
-    //   await contract.vote(file.id, 2);
-    // }
-
-    console.log(await contract.checkApplicationStatus(1));
+    console.log(await contract.checkApplicationStatus(file.id));
     // if (await contract.checkApplicationStatus(file.id))
-    //   this.props.updateFileVerification('approve', file);
+    this.props.updateFileVerification('approve', file);
     // else {
     //   this.props.updateFileVerification('decline', file);
     // }
@@ -71,6 +63,9 @@ class Verify extends Component {
           < tr >
             <td>{item.id}</td>
             <td>{item.Name}</td>
+            <td>
+              <a href={item.URL} target="_blank">Open File</a>
+            </td>
             <td>{item.Size}</td>
             <td>{item.Type}</td>
             <td>{item.User_Id}</td>
@@ -87,6 +82,9 @@ class Verify extends Component {
           < tr >
             <td>{item.id}</td>
             <td>{item.Name}</td>
+            <td>
+              <a href={item.URL} target="_blank">Open File</a>
+            </td>
             <td>{item.Size}</td>
             <td>{item.Type}</td>
             <td>{item.User_Id}</td>
@@ -108,6 +106,7 @@ class Verify extends Component {
             <tr>
               <th>File Id</th>
               <th>File Name</th>
+              <th>File URL</th>
               <th>File Size</th>
               <th>File Type</th>
               <th>User Id</th>
@@ -130,6 +129,7 @@ class Verify extends Component {
             <tr>
               <th>File Id</th>
               <th>File Name</th>
+              <th>File URL</th>
               <th>File Size</th>
               <th>File Type</th>
               <th>User Id</th>

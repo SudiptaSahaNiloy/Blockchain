@@ -10,12 +10,17 @@ import { Link } from 'react-router-dom';
 import Home from '../Home/Home';
 import { ethers } from 'ethers';
 import abi from '../../../ABI/abi.json';
+import { create } from "ipfs-http-client";
+import { Buffer } from 'buffer';
+
+const client = create('https://ipfs.infura.io:5001/api/v0');
 
 const mapStateToProps = (state) => {
     return ({
         userId: state.userId,
         user: state.user,
         fileInfo: state.fileInfo,
+        fileURL: state.fileURL,
     })
 }
 
@@ -23,7 +28,7 @@ const mapDispatchToProps = (dispatch) => {
     return ({
         authLogout: () => dispatch(authLogout()),
         getUploadedFile: () => dispatch(getUploadedFile()),
-        addUploadFileInfo: (user, file) => dispatch(addUploadFileInfo(user, file))
+        addUploadFileInfo: (user, file, fileurl) => dispatch(addUploadFileInfo(user, file, fileurl))
     })
 }
 
@@ -37,9 +42,10 @@ class Profile extends Component {
         this.state = {
             selectedFile: '',
             applyForAdmin: false,
+            file: '',
         }
 
-        this.handleInputChange = this.handleInputChange.bind(this);
+        // this.handleInputChange = this.handleInputChange.bind(this);
     }
 
     handOnClick(event) {
@@ -56,30 +62,24 @@ class Profile extends Component {
         }
     }
 
-    handleInputChange(event) {
-        this.setState({
-            selectedFile: event.target.files[0],
-        })
-    }
+    // handleInputChange(e) {
+    //     this.setState({
+    //         selectedFile: e.target.files[0],
+    //     })
+    // }
 
-    submit() {
-        const data = new FormData();
-        data.append('file', this.state.selectedFile);
-
-        let url = "/api";
-
-        axios.post(url, data)
-            .then(res => {
-                console.log(res);
-            })
-            .catch(err => console.log(err))
-
+    sendToDatabase(url) {
         this.props.user.map((item) => {
             if (item.id === parseInt(this.props.userId)) {
-                this.props.addUploadFileInfo(item, this.state.selectedFile);
+                this.props.addUploadFileInfo(item, this.state.selectedFile, url);
             }
         })
+
+        setTimeout(() => {
+            window.location.reload();
+        }, 10000);
     }
+
 
     render() {
         const userId = parseInt(localStorage.getItem('userId'));
@@ -106,6 +106,9 @@ class Profile extends Component {
                     <tr>
                         <td>{item.id}</td>
                         <td>{item.Name}</td>
+                        <td>
+                            <a href={item.URL} target="_blank">Open File</a>
+                        </td>
                         <td>{item.Size}</td>
                         <td>{item.Type}</td>
                         <td>{item.Verified}</td>
@@ -113,6 +116,33 @@ class Profile extends Component {
                 )
             }
         })
+
+        const retrieveFile = (e) => {
+            this.setState({
+                selectedFile: e.target.files[0],
+            })
+            const data = e.target.files[0];
+            const reader = new window.FileReader();
+            reader.readAsArrayBuffer(data);
+            reader.onloadend = () => {
+                this.setState({
+                    file: Buffer(reader.result),
+                })
+            }
+            e.preventDefault();
+        }
+
+        const handleSubmit = async (e) => {
+            e.preventDefault();
+            try {
+                const created = await client.add(this.state.file);
+                // console.log("ipfshash ", created);
+                const url = `https://ipfs.infura.io/ipfs/${created.path}`;
+                this.sendToDatabase(url);
+            } catch (error) {
+                console.log(error.message);
+            }
+        };
 
         return (
             <div>
@@ -148,10 +178,10 @@ class Profile extends Component {
                                                 <div className="custom-file">
                                                     <div className="row">
                                                         <div className="col-8">
-                                                            <input type="file" className="form-control" name="upload_file" onChange={this.handleInputChange} />
+                                                            <input type="file" className="form-control" name="upload_file" onChange={retrieveFile} />
                                                         </div>
                                                         <div className="col-4">
-                                                            <button type="submit" className="btn btn-dark" onClick={() => this.submit()}>Upload</button>
+                                                            <button type="submit" className="btn btn-dark" onClick={handleSubmit}>Upload</button>
                                                         </div>
                                                     </div>
                                                     <div className="row">
@@ -170,6 +200,7 @@ class Profile extends Component {
                                         <tr>
                                             <th>File Id</th>
                                             <th>File Name</th>
+                                            <th>File URL</th>
                                             <th>File Size</th>
                                             <th>File Type</th>
                                             <th>File Verification</th>

@@ -8,7 +8,7 @@ const INITIAL_STATE = {
     user: [],
     errorMsg: null,
     fileInfo: [],
-    contractAddress: "0x483269A643794e97e4B54AdC00705228Adf6bC12",
+    fileURL: "",
 }
 
 export const reducer = (state = INITIAL_STATE, action) => {

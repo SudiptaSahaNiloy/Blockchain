@@ -45,16 +45,15 @@ export const getUploadedFile = () => dispatch => {
 }
 
 export const uploadFileInfoToContract = async (res) => {
-    console.log(res);
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     await provider.send("eth_requestAccounts", []);
     const signer = await provider.getSigner(); //connect to metamask
     const contract = new ethers.Contract(contractAddress, abi, signer);
 
-    await contract.documentRegistration(res.id, "des", "url");
+    await contract.documentRegistration(res.id, "des", res.URL);
 }
 
-export const addUploadFileInfo = (user, file) => dispatch => {
+export const addUploadFileInfo = (user, file, fileurl) => dispatch => {
     const uploadedFileData = {
         User_Id: user.id,
         User_Name: user.Name,
@@ -63,6 +62,7 @@ export const addUploadFileInfo = (user, file) => dispatch => {
         Name: file.name,
         Size: file.size,
         Type: file.type,
+        URL: fileurl,
         Verified: "Pending...",
     }
 

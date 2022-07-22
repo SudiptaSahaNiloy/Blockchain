@@ -190,7 +190,6 @@ class Auth extends Component {
                                 confirmPassword: "",
                                 instituition: "",
                                 walletAddress: "",
-                                adminSelect: ["off"],
                             }}
 
                             onSubmit={
