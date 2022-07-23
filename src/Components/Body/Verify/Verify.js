@@ -40,8 +40,6 @@ class Verify extends Component {
       await contract.vote(file.id, 2);
     }
 
-    let approved = '';
-
     setTimeout(async () => {
       if (await contract.checkApplicationStatus(file.id)){
         console.log("yes");

@@ -63,7 +63,7 @@ function Home(props) {
                 positiveMsg: "User is given the role of an Admin",
                 negativeMsg: "",
             });
-            window.location.reload();
+            // window.location.reload();
             props.updateRole(props.id, currentUser, "admin");
         }
     }

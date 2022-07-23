@@ -14,5 +14,30 @@
       "id": 1
     }
   ],
-  "UploadedFile": []
+  "UploadedFile": [
+    {
+      "User_Id": 1,
+      "User_Name": "Sudipta Saha Niloy",
+      "User_Email": "niloy305968@gmail.com",
+      "User_Institution": "CUET",
+      "Name": "city_silhouette_art_136751_1920x1080.jpg",
+      "Size": 313524,
+      "Type": "image/jpeg",
+      "URL": "https://ipfs.infura.io/ipfs/QmS2NzBmHR36hfyeWiz3Cusbo26VNNeE3GMyv6BhRokxX5",
+      "Verified": "Pending...",
+      "id": 1
+    },
+    {
+      "User_Id": 1,
+      "User_Name": "Sudipta Saha Niloy",
+      "User_Email": "niloy305968@gmail.com",
+      "User_Institution": "CUET",
+      "Name": "moonwalk.jpg",
+      "Size": 2998475,
+      "Type": "image/jpeg",
+      "URL": "https://ipfs.infura.io/ipfs/QmUGZhsZBgpZxuvUwzGJQMiaP9xSwz89k83iE6epgpmwAE",
+      "Verified": "Approved",
+      "id": 2
+    }
+  ]
 }
