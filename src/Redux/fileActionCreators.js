@@ -9,8 +9,8 @@ const URL = 'http://localhost:3001/UploadedFile/';
 export const updateFileVerification = (verification, file) => {
     const file_id = file.id;
 
-    let Verified = false;
-    // console.log(Verified);
+    let Verified = '';
+    console.log(verification);
 
     if (verification === 'approve') {
         Verified = 'Approved';

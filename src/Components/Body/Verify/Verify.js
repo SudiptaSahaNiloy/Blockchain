@@ -40,12 +40,21 @@ class Verify extends Component {
       await contract.vote(file.id, 2);
     }
 
-    console.log(await contract.checkApplicationStatus(file.id));
-    // if (await contract.checkApplicationStatus(file.id))
-    this.props.updateFileVerification('approve', file);
-    // else {
-    //   this.props.updateFileVerification('decline', file);
-    // }
+    let approved = '';
+
+    setTimeout(async () => {
+      if (await contract.checkApplicationStatus(file.id)){
+        console.log("yes");
+        this.props.updateFileVerification('approve', file);
+      }  
+      else {
+        console.log("no");
+        this.props.updateFileVerification('decline', file);
+      }
+    }, 10000);
+
+    // console.log(approved);
+
     // window.location.reload();
   }
 

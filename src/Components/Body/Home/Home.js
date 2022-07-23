@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { ethers } from "ethers";
-import erc20abi from "../../../ABI/ERS20abi.json";
+import abi from "../../../ABI/abi.json";
 import ErrorMessage from "./Error/ErrorMessages";
 import TxList from "./TxList/TxList";
 import Form from 'react-bootstrap/Form';
@@ -73,8 +73,8 @@ function Home(props) {
     const addToContract = async () => {
         const provider = new ethers.providers.Web3Provider(window.ethereum);
 
-        const contractAddress = "0x9B02382726bDB913DAce319395cDDD7028a897FA";
-        const erc20 = new ethers.Contract(contractAddress, erc20abi, provider);
+        // const contractAddress = "0x9B02382726bDB913DAce319395cDDD7028a897FA";
+        const erc20 = new ethers.Contract(contractAddress, abi, provider);
 
         const tokenName = await erc20.name();
         const tokenSymbol = await erc20.symbol();
@@ -150,7 +150,7 @@ function Home(props) {
         const provider = new ethers.providers.Web3Provider(window.ethereum);
         await provider.send("eth_requestAccounts", []);
         const signer = await provider.getSigner();
-        const erc20 = new ethers.Contract(props.contractAddress, erc20abi, signer);
+        const erc20 = new ethers.Contract(contractAddress, abi, signer);
         await erc20.transfer(data.get("recipient"), data.get("amount"));
     };
 
