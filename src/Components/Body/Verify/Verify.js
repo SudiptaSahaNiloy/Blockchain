@@ -40,16 +40,26 @@ class Verify extends Component {
       await contract.vote(file.id, 2);
     }
 
-    setTimeout(async () => {
-      if (await contract.checkApplicationStatus(file.id)){
-        console.log("yes");
-        this.props.updateFileVerification('approve', file);
-      }  
-      else {
-        console.log("no");
-        this.props.updateFileVerification('decline', file);
-      }
-    }, 10000);
+    // console.log(await contract.checkApplicationStatus(file.id));
+
+    let sol = await contract.checkApplicationStatus(file.id);
+
+    console.log(sol);
+
+    while (sol === 0) {
+      sol = await contract.checkApplicationStatus(file.id);
+      console.log(sol);
+    }
+
+    if (sol === 1) {
+      console.log("Approved");
+      this.props.updateFileVerification('approve', file);
+    }
+
+    if (sol === 2) {
+      console.log("Declined");
+      this.props.updateFileVerification('decline', file);
+    }
 
     // console.log(approved);
 

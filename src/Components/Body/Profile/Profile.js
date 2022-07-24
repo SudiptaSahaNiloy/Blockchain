@@ -154,7 +154,7 @@ class Profile extends Component {
                                     <div className="row g-0">
                                         <div className="col-md-4 gradient-custom text-center text-white"
                                             style={{ borderTopLeftRadius: ".5rem", borderBottomLeftRadius: ".5rem" }}>
-                                            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
+                                            <img src="https://cdn3.iconfinder.com/data/icons/essential-rounded/64/Rounded-31-512.png"
                                                 alt="Avatar" className="img-fluid my-3" style={{ width: "80px" }} />
                                             <h5>{currentUser.Name}</h5>
                                             <p>{currentUser.Role[0]}, {currentUser.Role[1]}, {currentUser.Role[2]}</p>
