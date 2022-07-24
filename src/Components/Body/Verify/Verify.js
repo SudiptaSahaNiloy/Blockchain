@@ -54,11 +54,13 @@ class Verify extends Component {
     if (sol === 1) {
       console.log("Approved");
       this.props.updateFileVerification('approve', file);
+      window.location.reload();
     }
 
     if (sol === 2) {
       console.log("Declined");
       this.props.updateFileVerification('decline', file);
+      window.location.reload();
     }
 
     // console.log(approved);

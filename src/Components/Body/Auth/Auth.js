@@ -92,7 +92,7 @@ class Auth extends Component {
                                     onChange={handleChange}
                                     name="instituition"
                                     values={values.instituition}
-                                    placeholder="Current Instituition" />
+                                    placeholder="Current Organization" />
                             </FormGroup>
                         </Col><br />
                         <Col md={12}>

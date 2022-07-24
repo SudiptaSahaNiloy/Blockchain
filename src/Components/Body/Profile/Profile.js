@@ -170,7 +170,7 @@ class Profile extends Component {
                                                     <p className="text-muted">{currentUser.Email}</p>
                                                 </div>
                                                 <div className="col-6 mb-3">
-                                                    <h6>Institution</h6>
+                                                    <h6>Organization</h6>
                                                     <p className="text-muted">{currentUser.Institution}</p>
                                                 </div>
                                             </div>

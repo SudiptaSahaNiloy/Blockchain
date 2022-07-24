@@ -78,7 +78,7 @@ class Admin extends Component {
                             <th>#id</th>
                             <th>Name</th>
                             <th>Email</th>
-                            <th>Institution</th>
+                            <th>Organization</th>
                             <th>Admin</th>
                             <th>Verifier</th>
                             <th>Wallet Address</th>

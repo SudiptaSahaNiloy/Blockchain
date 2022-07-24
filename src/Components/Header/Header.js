@@ -26,7 +26,7 @@ class Header extends Component {
         return (
             <Navbar className="navbar-section" color="dark" dark expand="md" >
                 <div className="navbar-section-brand">
-                    <NavbarBrand style={{ fontSize: "30px", fontWeight: "bold", padding: "100px" }}>BLOCKCHAIN</NavbarBrand>
+                    <NavbarBrand style={{ fontSize: "30px", fontWeight: "bold", padding: "100px" }}>Document Verification</NavbarBrand>
                 </div>
                 <NavbarToggler onClick={toggle} />
                 <div style={{ width: "100%" }}>
