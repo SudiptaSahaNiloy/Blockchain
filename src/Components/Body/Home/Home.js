@@ -46,6 +46,8 @@ function Home(props) {
             }
         })
 
+        console.log(currentUser.Role[1]);
+
         let admin = false;
         if (currentUser.Role[1] === 'admin') {
             setalertMsg({

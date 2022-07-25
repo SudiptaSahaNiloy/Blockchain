@@ -37,7 +37,17 @@ class Admin extends Component {
             const contract = new ethers.Contract(contractAddress, abi, signer);
             await contract.addVerifiers(user.WalletAddress);
 
-            if (await contract.checkIfVerifiers(user.WalletAddress)) {
+            let verifier = await contract.checkIfVerifiers(user.WalletAddress);
+            console.log(verifier);
+
+            while(verifier === false){
+                verifier = await contract.checkIfVerifiers(user.WalletAddress);
+                console.log(verifier);
+            }
+
+            // console.log(verifier);
+
+            if (verifier) {
                 window.location.reload();
                 this.props.updateRole(id, user, "verifier");
             }

@@ -12,6 +12,19 @@
         "verifier"
       ],
       "id": 1
+    },
+    {
+      "Name": "fahim  abir",
+      "Email": "fahim@gmail.com",
+      "Password": "bangladesh",
+      "Institution": "CUET",
+      "WalletAddress": "0x892D6980d627739C1C5A6C8A34C76AFb7A1e86e4",
+      "Role": [
+        "user",
+        "admin",
+        "verifier"
+      ],
+      "id": 2
     }
   ],
   "UploadedFile": [
